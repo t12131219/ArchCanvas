@@ -1,0 +1,386 @@
+{
+  "schema": "archcanvas-local-browser-observations/1",
+  "date": "2026-11-01",
+  "browser": "Codex In-app Browser",
+  "url": "http://127.0.0.1:8801/",
+  "method": "Actual CUA model-library open and graph DOM attributes. Rows transcribed from tool observations; no per-row sealed screenshot/DOM receipt.",
+  "browserVersion": null,
+  "fixedHardware": null,
+  "fontEnvironment": null,
+  "scope": "43 default configurations, not the complete publication or cross-browser matrix",
+  "rows": [
+    {
+      "name": "Transformer default",
+      "nodes": 82,
+      "edges": 80,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "MultilayerPerceptron mlp",
+      "nodes": 11,
+      "edges": 9,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ConvNet cnn",
+      "nodes": 15,
+      "edges": 12,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "LeNet5 cnn",
+      "nodes": 21,
+      "edges": 16,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "Autoencoder",
+      "nodes": 8,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "VariationalAutoencoder",
+      "nodes": 25,
+      "edges": 24,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "RNN rnn",
+      "nodes": 14,
+      "edges": 13,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "GraphNet gnn",
+      "nodes": 12,
+      "edges": 11,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "BranchMLP",
+      "nodes": 11,
+      "edges": 10,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "TinyCNN",
+      "nodes": 9,
+      "edges": 6,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ReusedRecurrent",
+      "nodes": 7,
+      "edges": 6,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ConvVariationalAutoencoder corpus ae-conv-var",
+      "nodes": 27,
+      "edges": 26,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "VGG16 corpus cnn-vgg16",
+      "nodes": 28,
+      "edges": 21,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "NiN corpus nin-cifar10_filter-response-norm",
+      "nodes": 7,
+      "edges": 6,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ResidualBlock corpus resnet-ex-1",
+      "nodes": 14,
+      "edges": 13,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ConvNet corpus resnet-ex-1",
+      "nodes": 20,
+      "edges": 19,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "GraphNet corpus gnn-basic-graph-spectral-1",
+      "nodes": 28,
+      "edges": 21,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "RNN corpus rnn_lstm_bi_imdb",
+      "nodes": 14,
+      "edges": 13,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "DistilBERTClass corpus distilbert-v0",
+      "nodes": 13,
+      "edges": 9,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ForeignComposition",
+      "nodes": 28,
+      "edges": 30,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "BrokenCell",
+      "nodes": 10,
+      "edges": 7,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "BeforeNorm",
+      "nodes": 10,
+      "edges": 7,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "DisconnectedNorm",
+      "nodes": 7,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "UnknownFusion",
+      "nodes": 13,
+      "edges": 11,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "SharedBranches",
+      "nodes": 6,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "LoopWithBoundary",
+      "nodes": 17,
+      "edges": 13,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "RepeatedFragments",
+      "nodes": 26,
+      "edges": 19,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "BranchMosaic",
+      "nodes": 29,
+      "edges": 23,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "WideBranches",
+      "nodes": 34,
+      "edges": 27,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "WovenFusion",
+      "nodes": 25,
+      "edges": 26,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "GatedMixture",
+      "nodes": 19,
+      "edges": 18,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ShapeDrivenFusion",
+      "nodes": 11,
+      "edges": 10,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ImageResidual",
+      "nodes": 8,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "VectorResidual",
+      "nodes": 6,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "VectorBlock",
+      "nodes": 7,
+      "edges": 5,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ConditionalResidual",
+      "nodes": 10,
+      "edges": 10,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "ConvStack",
+      "nodes": 4,
+      "edges": 2,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "HeterogeneousStack",
+      "nodes": 4,
+      "edges": 2,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "SameSource",
+      "nodes": 4,
+      "edges": 4,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "TwoSources",
+      "nodes": 5,
+      "edges": 4,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "SharedStack",
+      "nodes": 4,
+      "edges": 2,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "IndependentStack",
+      "nodes": 4,
+      "edges": 2,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "name": "Transformer CPU archived",
+      "nodes": 30,
+      "edges": 23,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    }
+  ],
+  "editedMlp": {
+    "rename": "MLP 本地验收副本",
+    "undo": true,
+    "redo": true,
+    "save": true,
+    "reload": true,
+    "restoredNodes": 19,
+    "restoredEdges": 15,
+    "sourceConstraintValid": true,
+    "layoutConstraintValid": true,
+    "jsonDownload": "UI reported success; downloaded bytes/path not verified"
+  },
+  "transformerScopedDepths": [
+    {
+      "encoderDepth": 0,
+      "nodes": 52,
+      "edges": 52,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "encoderDepth": 1,
+      "nodes": 59,
+      "edges": 58,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "encoderDepth": 2,
+      "nodes": 80,
+      "edges": 77,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    },
+    {
+      "encoderDepth": 3,
+      "nodes": 87,
+      "edges": 87,
+      "layoutConstraintValid": true,
+      "sourceConstraintValid": true
+    }
+  ],
+  "transformerScopedUndoRedo": {
+    "undoNodes": 80,
+    "undoEdges": 77,
+    "redoNodes": 87,
+    "redoEdges": 87,
+    "allConstraintsValid": true
+  },
+  "transformerDepth3DomTiming": {
+    "frontierMs": 1171,
+    "worker": {
+      "buildMs": 905,
+      "routeMs": 47,
+      "validationMs": 6,
+      "totalMs": 976
+    },
+    "renderMs": 4.9,
+    "scope": "DOM/command phase timings, not input-to-paint or presented FPS"
+  },
+  "transformerScopedSaveReload": {
+    "nodes": 87,
+    "edges": 87,
+    "layoutConstraintValid": true,
+    "sourceConstraintValid": true
+  },
+  "transformerDefaultSaveReload": {
+    "nodes": 82,
+    "edges": 80,
+    "layoutConstraintValid": true,
+    "sourceConstraintValid": true
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "baselineCommit": "b993841ef33347fdb7916b9fd27dec95bb9e5892",
+  "scope": "Modified implementation/test files and top-level built app assets; bounded binding, not a complete runtime/package inventory.",
+  "files": [
+    {
+      "path": "studio/public/preview/integration-manifest.json",
+      "bytes": 78370,
+      "sha256": "75d7674f9be8a627faa2a8ccc3fc3dd0299c0c913fd20b7d95ce0a46e947a3ca"
+    },
+    {
+      "path": "studio/public/preview/yworks_edge_router_lab/studio-semantic.js",
+      "bytes": 19255,
+      "sha256": "a7b1a80bddb6c98210e9ac1ef2a3577d14c6d6658786c57dab4b0b04f11b968b"
+    },
+    {
+      "path": "studio/tests/summaryApplyLayout.test.ts",
+      "bytes": 8739,
+      "sha256": "78735ff52785f6fbe78d50a13a4dc8cfed82237188eb2b6d8c74b29a72e48416"
+    },
+    {
+      "path": "studio/tests/summaryInteractionPerformance.test.ts",
+      "bytes": 5478,
+      "sha256": "2e89873cf90b08bfb14ca14ebb9c75e225b963d5316472571d1bd1fbcd6728de"
+    },
+    {
+      "path": "studio/dist/index.html",
+      "bytes": 477,
+      "sha256": "eb9af10d453231f273db16a572611dffb03abb2e52dfcb7627b56d81150ef919"
+    },
+    {
+      "path": "studio/dist/assets/PythonCodeEditor-CY3IYRUc.js",
+      "bytes": 2851,
+      "sha256": "88cdbcc28ffd651eaeb761d66fa075449b5cb9650ed617c6c6cde85ce3ecd6a1"
+    },
+    {
+      "path": "studio/dist/assets/PythonCodeEditor-xf7smRtb.css",
+      "bytes": 2643,
+      "sha256": "6f0bde7e820a1f1173d269f66149658f12357253a5cf9eb169b978ef29ae7b86"
+    },
+    {
+      "path": "studio/dist/assets/SourceCodeWindow-BXkOyQpq.js",
+      "bytes": 5660,
+      "sha256": "fa62f2ceae32c59567dd0b3cd2b46938391ca3c12e8f543cfbd19188462832d0"
+    },
+    {
+      "path": "studio/dist/assets/editor.worker-CGG2Yh4v.js",
+      "bytes": 105,
+      "sha256": "8bb274fc1be3ebb5b8f7a11f547397f249842010832b7b423b53aba9f41f900a"
+    },
+    {
+      "path": "studio/dist/assets/editor.worker-CRz__AKW.js",
+      "bytes": 303774,
+      "sha256": "a8d36cd1157642e5729b76731d3c20eb4f773c7706594643e5baa7791861629d"
+    },
+    {
+      "path": "studio/dist/assets/index-C8Kpo_7m.js",
+      "bytes": 832422,
+      "sha256": "c4e833ba68114f4e116cb4c1f0051086e85a4cd209e120815e7a3a1aa48cb4b2"
+    },
+    {
+      "path": "studio/dist/assets/index-pEYqmOGI.css",
+      "bytes": 86853,
+      "sha256": "8ea348658a556d98f05e5a575777617e5fdaf31196bea1c55997273afb5e9aa0"
+    },
+    {
+      "path": "studio/dist/assets/monacoPython-BBiApBm8.css",
+      "bytes": 123921,
+      "sha256": "269841b0fcfea70b6f72bb165c2f31a1c5de170907cae56889c04ee7f1f9c166"
+    },
+    {
+      "path": "studio/dist/assets/monacoPython-DBs8yTlU.js",
+      "bytes": 3003521,
+      "sha256": "e82084d04987ce380fe600ac78410f1b8dac3cb892eee6dbe10d68bd767154d6"
+    },
+    {
+      "path": "studio/dist/assets/python-BrgK1HPv.js",
+      "bytes": 3465,
+      "sha256": "f19ce48413847f114db61138db2d975239bceba317643847d29547e02e0fabbd"
+    },
+    {
+      "path": "studio/dist/assets/sourceEditingClient-DKpxiEKz.js",
+      "bytes": 754,
+      "sha256": "871e98e8b21428876313f2ff646e3189ad240d1d14dec94089e1a8012ec6d1f1"
+    },
+    {
+      "path": "studio/dist/assets/sourceEditingWorker-DGmrTJTu.js",
+      "bytes": 122963,
+      "sha256": "86e8fb312ce9515adaa6a74061eb728b0aa2c7751adfc79f79b5018983fd9f75"
+    },
+    {
+      "path": "studio/dist/preview/yworks_edge_router_lab/studio-semantic.js",
+      "bytes": 19255,
+      "sha256": "a7b1a80bddb6c98210e9ac1ef2a3577d14c6d6658786c57dab4b0b04f11b968b"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 2071,
+      "sha256": "8424c41205a7bf17e86e7497a7b7f8283ffc21ab4fea201d71e29270c685d630"
+    }
+  ]
+}

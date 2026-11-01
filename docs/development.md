@@ -7,6 +7,8 @@ Python authoring have separate contracts; see
 [runtime compatibility](../skills/archcanvas/references/runtime-compatibility.md).
 The [2026-11-01 maintenance report](maintenance-20261101.md) records this change's
 actual test results and remaining gaps.
+The [Summary routing and local acceptance follow-up](summary-acceptance-20261101.md)
+records the later Transformer fix, current browser observations and open gates.
 
 ## Local build
 
@@ -40,10 +42,13 @@ For the full backend collection in a suitably configured local environment:
 
 Keep fail/skip counts with the exact commit and build. Do not add unrelated
 historical counts together or regenerate acceptance evidence to hide failures.
-The large Transformer still has explicitly diagnosed overlapping routes.
-An inspectable native graph is not a complete layout: tests require its pending
-or failed markers, preserve its source/history, and reject a successful Apply
-when full geometry validation fails. Parameter-read arrows are exact consumer
+The large Transformer's default view now finishes legal initial routes before
+optional aesthetic searches; its 82 nodes/80 edges pass strict geometry with no
+pending or failed routes. Apply and interaction tests require strict validation
+for both Transformer and MLP. An intentionally interrupted graph must retain
+honest diagnostics and cannot publish a successful Apply when full validation
+fails. These bounded checks do not certify every possible frontier or publication
+quality. Parameter-read arrows are exact consumer
 annotations and remain covered by the canonical accounting tests.
 
 The optional DOM export check accepts an existing browser through

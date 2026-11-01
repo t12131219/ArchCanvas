@@ -1,5 +1,10 @@
 # M4 研究者任务记录与复核
 
+2026-11-01 适用性说明：此协议和研究包采集器仍绑定旧正式 Canvas 基线。
+当前默认 Summary 的任务、保存、前沿和性能采样需先完成协议适配，再分配真人席位。
+本轮三席仅完成冻结文件/端口准备，真人仍为 0；详情见
+[Summary 本地验收](summary-acceptance-20261101.md)。旧结果不继承为当前认证。
+
 ## 当前状态：受限 memory 连线连续性（2026-10-06）
 
 当前 `index-CU5JhnoS.js` / `index--unhoRTb.css` 的[统一收据](evidence/m4-memory-continuity-current/checks-final-attempt-2/receipt.json)为 Studio **436/436**、fail/skip/cancel0，strict TypeScript/Vite exit0、publication **11/11** skip0；115源码/测试/配置＋3dist＝**118**，另11publication输入。36历史core＋1detail夹具单独冻结，115不是完整传递依赖清单。见[阶段](m4-memory-continuity.md)、[门](evidence/m4-current-gate-audit.json)及[source seal](evidence/m4-memory-continuity-current/implementation-work/source-seal-attempt-2/report.json)。

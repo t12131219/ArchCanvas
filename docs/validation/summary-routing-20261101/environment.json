@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-11-01T06:43:10.799077+00:00",
+  "platform": "Linux-6.8.0-101-generic-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "cpuModel": "13th Gen Intel(R) Core(TM) i5-13400F",
+  "logicalCpuCount": 16,
+  "nodeVersion": "v24.19.0",
+  "browser": "Codex In-app Browser",
+  "browserVersion": null,
+  "fontEnvironment": null,
+  "fixedEnvironmentCertified": false,
+  "scope": "Host snapshot observed after timings; not a locked hardware/font/browser or A/B repetition contract."
+}

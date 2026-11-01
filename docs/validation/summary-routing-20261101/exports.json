@@ -1,0 +1,52 @@
+[
+  {
+    "artifactId": "2064fc9a70a24b389eca1f89a4406750",
+    "caseId": "summary-authoring-6bbe5d41-4403-4119-aade-1f2178e1fda5",
+    "revision": 237,
+    "format": "svg",
+    "widthMm": 85.0,
+    "heightMm": 135.44350580781415,
+    "digestVerified": true,
+    "sourceBindingVerified": false
+  },
+  {
+    "artifactId": "794aff0e307a473586c9bee58dcdf4e6",
+    "caseId": "summary-authoring-6bbe5d41-4403-4119-aade-1f2178e1fda5",
+    "revision": 237,
+    "format": "pdf",
+    "widthMm": 180.0,
+    "heightMm": 286.82154171066526,
+    "digestVerified": true,
+    "sourceBindingVerified": false
+  },
+  {
+    "artifactId": "d328129748884abdaa4553124613a451",
+    "caseId": "summary-authoring-6bbe5d41-4403-4119-aade-1f2178e1fda5",
+    "revision": 237,
+    "format": "svg",
+    "widthMm": 180.0,
+    "heightMm": 286.82154171066526,
+    "digestVerified": true,
+    "sourceBindingVerified": false
+  },
+  {
+    "artifactId": "d553b7da041a4429af14ba945bbe255b",
+    "caseId": "summary-document-11d12e2f4a3cf2de1313727845347fd7057310bb6b2a7a6efd071ddb9067f191",
+    "revision": 8,
+    "format": "svg",
+    "widthMm": 180.0,
+    "heightMm": 417.75280898876406,
+    "digestVerified": true,
+    "sourceBindingVerified": false
+  },
+  {
+    "artifactId": "fde8c76e86f648ddb3773dd0820487f2",
+    "caseId": "summary-document-11d12e2f4a3cf2de1313727845347fd7057310bb6b2a7a6efd071ddb9067f191",
+    "revision": 8,
+    "format": "svg",
+    "widthMm": 85.0,
+    "heightMm": 197.27215980024968,
+    "digestVerified": true,
+    "sourceBindingVerified": false
+  }
+]

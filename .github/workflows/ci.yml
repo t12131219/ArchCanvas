@@ -33,9 +33,11 @@ jobs:
           npm run audit:preview
         working-directory: studio
       - name: Full frontend regression
-        run: npm test
+        shell: bash
+        run: npm test 2>&1 | tee "$RUNNER_TEMP/frontend-tests.log"
         working-directory: studio
       - name: Static and real HTTP regression
+        shell: bash
         env:
           PYTHONPATH: src:tests
         run: >-
@@ -47,10 +49,15 @@ jobs:
           test_source_rule_registry_atomic test_config_activation_http
           test_readiness_fixes test_summary_authoring_http
           test_summary_runtime_http test_preview_bundle_budgets
+          2>&1 | tee "$RUNNER_TEMP/python-tests.log"
       - name: Archive inventory
-        run: .venv/bin/python scripts/evidence_index.py --output "$RUNNER_TEMP/evidence-index.json"
+        if: always()
+        run: python scripts/evidence_index.py --output "$RUNNER_TEMP/evidence-index.json"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: evidence-index
-          path: ${{ runner.temp }}/evidence-index.json
+          name: regression-diagnostics
+          path: |
+            ${{ runner.temp }}/evidence-index.json
+            ${{ runner.temp }}/frontend-tests.log
+            ${{ runner.temp }}/python-tests.log

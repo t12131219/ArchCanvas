@@ -1,0 +1,16 @@
+✔ Apply batches preserve canonical facts, positions, independent undo and strict geometry: d6df94c94e8a5888 (171.610801ms)
+✔ Apply batches preserve canonical facts, positions, independent undo and strict geometry: 0216717d966327f4 (6574.105983ms)
+✔ an interrupted Transformer remains diagnosed and cannot replace a strictly valid document (1725.975763ms)
+✔ zero search budget retains all routes and defers exactly the selected scope; settings or geometry changes invalidate continuation (78.621086ms)
+✔ never and empty scopes do not reroute; manual knots and unselected edge geometry survive selected optimization (80.733426ms)
+✔ actual Apply handler delegates source preflight to Worker and preserves history on cancellation: false (1.152404ms)
+✔ actual Apply handler delegates source preflight to Worker and preserves history on cancellation: true (0.577841ms)
+✔ bridge emits exactly one complete document after Apply while keeping busy and cancellation status live (1.280634ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8853.974252

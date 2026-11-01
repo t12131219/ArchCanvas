@@ -103,10 +103,12 @@
   }
   function prepare(message){
     const started=performance.now();
-    // Frontier gestures need legal routes, not a new global cosmetic search.
+    // Opening a view and changing its frontier must finish legal routes before
+    // spending the shared budget on cosmetic alternatives. Otherwise early
+    // edges exhaust it and later edges retain overlapping placeholder paths.
     // Explicit route/optimise commands retain all aesthetic passes.
-    const interactive=!!message.transition;
-    message={...message,options:G.routeOptions({...(interactive?{firstLegal:true,refineCrossings:false,refinePlacement:false,refineChannels:false,refineFlow:false}:{}),...message.options,...(interactive?{crossingCost:0}:{})})};
+    const interactive=!!message.transition,initial=message.task==='generic-build';
+    message={...message,options:G.routeOptions({...(interactive||initial?{firstLegal:true,refineCrossings:false,refinePlacement:false,refineChannels:false,refineFlow:false}:{}),...message.options,...(interactive?{crossingCost:0}:{})})};
     // Aesthetic passes may try other physical ports. An explicit inspector
     // endpoint edit takes precedence over those optional layout proposals.
     if(Object.keys(message.options.portOverrides||{}).length)Object.assign(message.options,{refineCrossings:false,refinePlacement:false,refineChannels:false,refineFlow:false});

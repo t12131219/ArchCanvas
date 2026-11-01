@@ -1,0 +1,7 @@
+{
+  "yamlParsed": true,
+  "regressionShellSyntaxValid": true,
+  "failedTeePipelineRetainsNonzeroExit": true,
+  "inventoryRunsAfterFailure": true,
+  "remoteTriggered": false
+}

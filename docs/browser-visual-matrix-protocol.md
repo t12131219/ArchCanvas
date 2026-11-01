@@ -1,5 +1,10 @@
 # 三黄金模型浏览器视觉矩阵采集
 
+2026-11-01 当前适用范围：下列 36+3 合同针对旧正式 Canvas renderer，不能直接认证
+当前默认 Summary iframe。当前已完成的 43 配置默认打开检查、导出样本及缺少的
+前沿/黑白/环境绑定见 [Summary 本地验收](summary-acceptance-20261101.md)。
+在建立 Summary 对应协议之前，不将旧 gold 或旧浏览器工件记为当前完整矩阵。
+
 当前（2026-10-06）构建仍为 `index-au3IB_0Q.js` / `index-B6WbMowt.css`。本轮[au3 浏览器矩阵与四向操作](m4-au3-current-matrix.md)已 collect 36 基线＋3 编辑后视图、234 工件；三个模型共12方向的实际拖动、撤销重做、保存重开有独立核对。36张fit及19张局部/编辑图分别AI审查，旧MLP右移失配保留，新起点补采单列。CNN外绕残差、窄缝拥挤、MLP边界折角和Transformer小移大改线仍是具体问题；文件完整不认证美观或出版。当前full observer保留6尝试/5完成、14eligible/10matched/4interactions、matched子集p95 3000ms；约1秒rAF间隔不是呈现帧认证。产品源码/build未改，沿用源码精确绑定的179/179、strict/build exit0；此前发行9/9是其209源码/654依赖/5symlink冻结副本范围，后续Skill文档改动不称同一完整发行字节。已有au3 4节点3边搭建链保存重开、静态生成及新工作副本保存保持独立证据；17模块＋3起点不等于逐模块完整验收。M4 partial、M5未开始，当前研究包未prepare/verify、0分配/收集/真人；AI不能替代真人。[文档更新前归档](evidence/before-m4-au3-full-matrix/manifest.json)保存此前4233绑定、24末读supplemental及两个原receipt；下方旧“当前/本轮/最终”只指各自版本和冻结时点。
 
 历史ChS（2026-10-05）为 `index-ChS0wIgb.js`（SHA256 `05019f89f0de0c0c622df7a2cc1a13ed58477c456244c97209a0f37db79139c9`）与 `index-CsXMONBp.css`。[ChS浏览器矩阵](m4-chs-current-matrix.md)已通过正式collect：36基础＋三模型各一编辑后，共39例/234工件，artifactCoverage=complete；人工审看仍pending、真人0。17基础模块＋3透明网络起点及位置修复继续使用同一产品，既有Studio152/152、strict/build0、独立发行9项保持版本范围，本轮未重跑产品套件。新五席研究包72实施绑定、4baseline、8991–8995仅登记，0分配/收集/真人。不同tensor交叉/重叠、repeat背景叠片、说明空白和密集图字号仍是问题；presented性能/活动取消/物理出版未认证，M4 partial、未进入M5。此前799绑定加原seal共800文件已在[文档更新前归档](evidence/before-m4-chs-browser-matrix/manifest.json)逐字保留；以下历史记录只按各自版本/时点读取。

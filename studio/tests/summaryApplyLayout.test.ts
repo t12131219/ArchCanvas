@@ -8,7 +8,7 @@ const catalog=JSON.parse(readFileSync(new URL('data/semantic/studio-catalog.json
 function build(id:string){const m=catalog.models.find((m:any)=>m.id===id),ir=JSON.parse(readFileSync(new URL('data/semantic/'+m.ir.path,base),'utf8')),state=m.presentation?JSON.parse(readFileSync(new URL('data/semantic/'+m.presentation.path,base),'utf8')).default_state:N.state('overview');return N.prepare({task:'generic-build',ir,state,options:{}}).graph;}
 const opts={margin:6,stub:28,bendCost:40,crossingCost:450,overlapCost:2,edgeSpacing:12,preserve:false,sides:'any',grid:0,style:'orthogonal',optimizeReadability:true};
 function strict(g:any){const v=E.validateView(g);assert.equal(v.source.ok,true,JSON.stringify(v.source));assert.equal(v.layout.ok,true,JSON.stringify(v.layout));assert.deepEqual(plain(v.edges.filter(([,v]:any)=>!v.ok)),[]);}
-for(const id of ['d6df94c94e8a5888'])test('Apply batches preserve canonical facts, positions, independent undo and strict geometry: '+id,()=>{
+for(const id of ['d6df94c94e8a5888','0216717d966327f4'])test('Apply batches preserve canonical facts, positions, independent undo and strict geometry: '+id,()=>{
  const graph=build(id),before=N.snapshot(graph),source=JSON.stringify(graph.generic.ir),geometry=JSON.stringify(graph.nodes),bindings=JSON.stringify(graph.edges.map((e:any)=>e.binding));strict(graph);
  const ids=graph.edges.map((e:any)=>e.id),r=E.optimizeRoutes(graph,ids,{...opts,budgetMs:80});assert.equal(r.ok,true);strict(r.graph);
  assert.equal(JSON.stringify(graph.nodes),geometry);assert.equal(JSON.stringify(graph.generic.ir),source);assert.equal(JSON.stringify(graph.edges.map((e:any)=>e.binding)),bindings);
@@ -16,19 +16,17 @@ for(const id of ['d6df94c94e8a5888'])test('Apply batches preserve canonical fact
  assert.equal(r.optimization.checked+r.optimization.pendingIds.length,ids.length);assert.ok(r.optimization.checked>0);
  const oldPending=new Set(r.optimization.pendingIds);if(oldPending.size){const next=E.optimizeRoutes(graph,ids,{...opts,budgetMs:80});assert.ok(next.optimization.checked<=oldPending.size,'continue must not redo already completed edges');assert.equal(next.optimization.checked+next.optimization.pendingIds.length,oldPending.size);strict(graph);}
 });
-test('an unresolved Transformer cannot publish a successful Apply or mutate the retained document',()=>{
- const graph=build('0216717d966327f4'),before=JSON.stringify(graph),validation=E.validateView(graph);
- assert.equal(validation.source.ok,true);assert.equal(validation.layout.ok,false);
- assert.equal(graph.nativeRouting.complete,false);assert.ok(graph.nativeRouting.failed+graph.nativeRouting.pending>0);
- for(const [id,check]of validation.edges.filter(([,check]:any)=>!check.ok)){
-  const edge=graph.edges.find((e:any)=>e.id===id);assert.equal(edge.failed,true);
-  for(const reason of check.violations)assert.ok(edge.reason.includes(reason));
- }
- assert.equal(N.accepts(graph,validation),true,'diagnosed incomplete graphs remain inspectable');
- const unmarked=G.cloneGeometry(graph);for(const edge of unmarked.edges){delete edge.failed;delete edge.pendingRouting;}
+test('an interrupted Transformer remains diagnosed and cannot replace a strictly valid document',()=>{
+ const graph=build('0216717d966327f4');strict(graph);assert.equal(graph.nativeRouting.complete,true);
+ const interrupted=G.build(graph.generic.ir,graph.generic.state);
+ const result=N.prepare({task:'generic-route',graph:interrupted,options:{budgetMs:0}}),validation=E.validateView(result.graph),before=JSON.stringify(result.graph);
+ assert.equal(validation.source.ok,true);assert.ok(validation.edges.some(([,v]:any)=>!v.ok));
+ assert.equal(result.graph.nativeRouting.complete,false);
+ assert.equal(N.accepts(result.graph,validation),true,'diagnosed incomplete graphs remain inspectable');
+ const unmarked=G.cloneGeometry(result.graph);for(const e of unmarked.edges){delete e.failed;delete e.pendingRouting;}
  assert.equal(N.accepts(unmarked,E.validateView(unmarked)),false,'invalid routes cannot silently claim completion');
- assert.throws(()=>E.optimizeRoutes(G.cloneGeometry(graph),graph.edges.map((e:any)=>e.id),{...opts,budgetMs:0}),/完整约束校验/);
- assert.equal(JSON.stringify(graph),before,'failed worker candidate cannot replace the retained document');
+ assert.throws(()=>E.optimizeRoutes(G.cloneGeometry(result.graph),result.graph.edges.map((e:any)=>e.id),{...opts,budgetMs:0}),/完整约束校验/);
+ assert.equal(JSON.stringify(result.graph),before,'failed candidate cannot replace the retained document');strict(graph);
 });
 test('zero search budget retains all routes and defers exactly the selected scope; settings or geometry changes invalidate continuation',()=>{
  const graph=build('d6df94c94e8a5888'),ids=graph.edges.slice(0,3).map((e:any)=>e.id),before=JSON.stringify(graph.edges);const r=E.optimizeRoutes(graph,ids,{...opts,budgetMs:0});assert.deepEqual(plain(r.optimization.pendingIds),plain(ids));assert.equal(r.optimization.checked,0);assert.equal(JSON.stringify(graph.edges),before);

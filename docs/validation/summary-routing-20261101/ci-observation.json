@@ -1,0 +1,15 @@
+{
+  "method": "Public GitHub Actions page observed through CUA, unauthenticated; exact logs unavailable",
+  "url": "https://github.com/t12131219/ArchCanvas-Model-Architecture-Studio/actions/runs/41279569549",
+  "baselineCommit": "b993841ef33347fdb7916b9fd27dec95bb9e5892",
+  "run": 52,
+  "status": "Failure",
+  "duration": "33m 47s",
+  "failedAnnotation": "Process completed with exit code 1.",
+  "annotationStep": 8,
+  "stepName": "Full frontend regression",
+  "exactFailingTests": null,
+  "missingArtifactWarning": "No files were found with the provided path: /home/runner/work/_temp/evidence-index.json. No artifacts will be uploaded.",
+  "includesUncommittedRoutingFix": false,
+  "newRemoteExecutionTriggered": false
+}

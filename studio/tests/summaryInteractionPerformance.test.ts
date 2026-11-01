@@ -22,7 +22,7 @@ function accepted(graph:any,requireComplete:boolean){
  }
 }
 for(const id of ['d6df94c94e8a5888','0216717d966327f4'])test(`interactive routes preserve source, routing diagnostics and reversible history: ${id}`,()=>{
- const strict=(graph:any)=>accepted(graph,id==='d6df94c94e8a5888');
+ const strict=(graph:any)=>accepted(graph,true);
  const m=catalog.models.find((m:any)=>m.id===id),ir=JSON.parse(readFileSync(new URL('data/semantic/'+m.ir.path,base),'utf8'));
  const state=m.presentation?JSON.parse(readFileSync(new URL('data/semantic/'+m.presentation.path,base),'utf8')).default_state:N.state('overview');
  const original=N.prepare({task:'generic-build',ir,state,options:{}}).graph;strict(original);

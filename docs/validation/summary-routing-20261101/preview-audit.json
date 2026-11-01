@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "scope": "Studio source imports, exports, literal dynamic imports and URL/Worker entries, including type dependencies; not a whole-product feature or performance certificate",
+  "modules": 109,
+  "reachableModules": 101,
+  "unreachable": [
+    "src/PerfBenchmarkPanel.tsx",
+    "src/StudyPanel.tsx",
+    "src/cameraViewState.ts",
+    "src/edgeAppearance.ts",
+    "src/layoutWarnings.ts",
+    "src/monaco.d.ts",
+    "src/nativePerformance.ts",
+    "src/perfBenchmark.ts"
+  ],
+  "unresolvedDynamicImports": [],
+  "existingRetiredPaths": [],
+  "retiredDeclarations": [],
+  "testOnlyImports": []
+}
