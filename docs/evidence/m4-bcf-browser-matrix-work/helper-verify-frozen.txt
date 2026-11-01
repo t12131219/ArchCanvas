@@ -1,5 +1,0 @@
-{
-  "frozenInputsUnchanged": true,
-  "inputBindingsChecked": 179,
-  "scope": "Preparation guard only; no actual captures evaluated."
-}

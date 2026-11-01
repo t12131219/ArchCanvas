@@ -104,6 +104,9 @@ class ConfigActivationCLITests(unittest.TestCase):
         self.assertEqual(self.path.read_bytes(), SOURCE.encode())
 
     def test_activation_cli_real_g6_and_exact_constructor_commit(self):
+        runtime = self.runtime()
+        if os.environ.get("ARCHCANVAS_REQUIRE_RUNTIME") != "1" and not all(Path(runtime[index]).is_file() for index in (3, 5)):
+            self.skipTest("Optional locked CPU runtime is not installed; see docs/runtime.md.")
         receipt = self.cli("activation", *self.common("ReLU"), "--activation", "GELU", *self.runtime(), expected=0 if os.environ.get("ARCHCANVAS_REQUIRE_RUNTIME") == "1" else None)
         if receipt["status"] == "Failed" and receipt.get("runtimeVerification", {}).get("status") == "unavailable" and os.environ.get("ARCHCANVAS_REQUIRE_RUNTIME") != "1":
             self.skipTest("Mandatory kernel isolation is unavailable in this command sandbox.")

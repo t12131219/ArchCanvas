@@ -1,1 +1,0 @@
-/api/exports/5ca65949ff47440e899456b348f6a78a/figure.svg

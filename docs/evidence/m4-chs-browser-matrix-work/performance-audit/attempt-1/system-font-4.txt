@@ -1,1 +1,0 @@
-DejaVu Sans	Book	/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf

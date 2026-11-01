@@ -1,8 +1,0 @@
-{
-  "status": "passed",
-  "scope": "isolated temporary paths",
-  "script": "scripts/rollback_archcanvas_generality_20261010.sh",
-  "restoredPrevious": true,
-  "replacedCandidateRetained": true,
-  "globalSkillChanged": false
-}

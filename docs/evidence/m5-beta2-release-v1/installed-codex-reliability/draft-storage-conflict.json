@@ -1,8 +1,0 @@
-{
-  "httpStatus": 409,
-  "body": {
-    "error": "Draft storage changed to revision 1; current edits were retained.",
-    "revision": 1
-  },
-  "storageUnchanged": true
-}

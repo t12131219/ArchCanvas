@@ -3,6 +3,7 @@ import copy
 import json
 from pathlib import Path
 import threading
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -35,7 +36,8 @@ class SummaryRuntimeProfileTests(unittest.TestCase):
             result = observe_summary({'model.py': SOURCE}, 'model:RuntimeFixture', SPEC)
             self.assertEqual(result['receipt']['status'], 'unavailable'); self.assertIsNone(result['document'])
             event = threading.Event(); event.set()
-            result = observe_summary({'model.py': SOURCE}, 'model:RuntimeFixture', SPEC, {**CONFIG, 'cancelEvent': event})
+            result = observe_summary({'model.py': SOURCE}, 'model:RuntimeFixture', SPEC,
+                                     {**CONFIG, 'interpreter': sys.executable, 'cancelEvent': event})
             self.assertEqual(result['receipt']['reason'], 'cancelled'); self.assertFalse(result['receipt']['model_executed'])
 
     def test_source_generation_mismatch_and_http_paths_are_rejected_before_worker(self):

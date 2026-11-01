@@ -966,7 +966,7 @@
       if(models.length===1){select.value=models[0].entry||models[0].id;$('sourceEntry').value=select.value;}
     }catch(error){sourceError(error);$('sourceDiscoveryStatus').textContent='扫描未完成；源码未改变。';}finally{button.disabled=false;}};
   $('exportSourcePackage').onclick=()=>{const b=importedPackages.get(current?.id);if(b)download(JSON.stringify(b,null,2),'application/json',b.title+'-source-adapter.json');};
-  $('openSourceExample').onclick=async()=>{try{const r=await fetch('../verification/source-adapter/river-net.json');if(!r.ok)throw new Error('无法读取示例适配包');await installSource(await r.json());}catch(e){sourceError(e);}};
+  $('openSourceExample').onclick=async()=>{try{const r=await fetch('../data/examples/river-net.json');if(!r.ok)throw new Error('无法读取示例适配包');await installSource(await r.json());}catch(e){sourceError(e);}};
     $('sourcePackage').onchange=async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>D.limits.fileBytes)throw new Error('文档 JSON 超过 128 MB');await studioLoad(JSON.parse(await file.text()));}catch(e){sourceError(e);}finally{event.target.value='';}};
   $('analyzeSource').onclick=async()=>{const button=$('analyzeSource');button.disabled=true;
     try{const files=await selectedSourceFiles();

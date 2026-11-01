@@ -1,113 +1,18 @@
 # Third-party notices
 
-## TFB read-only validation evidence (2026-10-29)
+Original ArchCanvas code is licensed under Apache-2.0. Third-party materials retain their original licenses and headers.
 
-The unknown-module view validation artifacts contain source text and source
-excerpts from the local TFB benchmark. Its MIT license (Copyright 2024 Huawei
-Technologies Co., Ltd) is retained at
-`docs/evidence/agent-unknown-views-20261029/tfb/TFB-LICENSE.txt`.
-These are validation evidence, not a new executable runtime dependency.
-The follow-up CPU validation executes an exact copied ChebyKAN source only in
-the formal isolated runtime; the original TFB directory remains read-only.
+## Bundled model materials
 
-The 2026-10-29 native import integration change skips legacy full-frontier
-construction when the native Summary Worker already owns the graph. Source
-verification and native graph acceptance are retained. The vendored
-flow optimizer also receives a transaction validation fix: complete proposed
-fanout trees must preserve distinct physical operand slots before acceptance.
-An unchanged MIT-licensed ChebyKAN source fixture and its license are retained
-under `fixtures/agent_views` for independent regression. This change adapts the
-already authorized vendored editor, not the failed Temp runtime.
+The model examples and source-component library include derived model data and source excerpts. Original model license texts are retained in [licenses/models](licenses/models/README.md). The MIT-licensed ChebyKAN test fixture retains its Huawei copyright and license in [fixtures/agent_views/LICENSE](fixtures/agent_views/LICENSE).
 
-The built Studio includes React, React DOM and Scheduler. Versions are fixed by `studio/package-lock.json`; the notices below are copied from the installed package LICENSE files. Python publication/runtime dependencies are optional, installed separately from their lock files and are not bundled here.
+## Summary canvas and semantic implementation
 
-## Summary_Merge preview migration (2026-10-14)
+The browser editor and semantic projection modules under `studio/public/preview`, and Python modules under `src/archcanvas_summary_semantic`, were adapted from this project's separate Summary_Merge implementation. They run entirely from this repository. The routing implementation does not include the commercial yFiles runtime. Historical migration snapshots, test reports and duplicate inventories are excluded from this source distribution.
 
-The 2026-10-28 authoring extension uses the already vendored, byte-identical
-`semantic_studio/authoring-model.js` and copies
-`data/semantic/authoring-presets.json` from Summary_Merge unchanged. Studio's
-`studio-authoring.js` and retained panel adapter are separate integration code.
-Source hashes, current validation and remaining authoring scope are recorded in
-`docs/summary-authoring-manifest-20261028.json` and
-`docs/summary-authoring-integration-20261028.md`.
+## Frontend dependencies
 
-
-At the user's explicit request, this source tree includes the recursive preview editor, router, model catalog, source snapshots and evidence copied from the separate local source `prototype/Summary_Merge`. The runtime copy is `studio/public/preview` (copied into `studio/dist/preview` by Vite); the standard-library AST adapter is adapted into `src/archcanvas_preview`. This source is distinct from the rejected `ArchCanvas_Model Architecture Studio_Temp` project. The formal build and server do not import or serve the original prototype directory.
-
-The baseline inventory [vendor-manifest.json](studio/dist/preview/vendor-manifest.json), also kept at `studio/public/preview/vendor-manifest.json` in the development tree, records each original relative path, byte count and SHA256: 7,355 copied files and 519,531,592 bytes, containing 115 current and 115 historical cases. Its SHA256 at migration was `95bce258c86021443752da6daad661696594c62a2eb04496f338e59c1b1af9bd`. Integration changes to the copied editor, bridge and presentation code are formal Studio changes; the baseline manifest records the copied source and does not claim later modified files remain byte-identical.
-
-The original `source_adapter/analyze.py` SHA256 was `4203423099ebe24d81a0d512e932d26ae3b172f8d7dce8f1d155c17fa4978650`; the original and retained `source_adapter/registry.json` SHA256 is `5e5a34d04886f1a0450428a0715abc3dc4a14caa3ff1d9669e7948f245f1dbb3`. The adapted package uses its own installed registry resource and has no runtime path into `prototype`.
-
-Model-source snapshots retain their source-specific license/notice files, original headers and evidence alongside the relevant sources. Those assets include third-party model examples and libraries; this migration does not relicense them or assert that every file shares the Studio license. See their retained `LICENSE`, `COPYING` and `NOTICE` files under `studio/public/preview/snapshots`, and the individual source/evidence paths in the inventory. No commercial yFiles runtime is introduced: the vendored browser routing implementation is local JavaScript. The migration's new validation scope and limits are recorded in [preview-migration.md](docs/preview-migration.md).
-
-Preset Python sources are also organized under `studio/public/preview/sources/packages` with their declared licenses copied into each package, and Notebook code-cell derivatives under `sources/notebooks`. Python text and line positions are preserved; filenames may be normalized for static module resolution. Original paths, content hashes and licenses remain recorded in `data/source-packages.json`, `data/catalog-sources.json` and `data/notebook-conversions.json`. The Notebook derivatives retain the original code headers and do not introduce a new license. Original materials and evidence remain in `snapshots`; the new source audit is documented in [preview-sources.md](docs/preview-sources.md).
-
-The 2026-10-28 extension also copies the 21 Python modules from Summary_Merge's
-`semantic_adapter` into `src/archcanvas_summary_semantic`. Static analysis is
-connected through `archcanvas_preview/semantic_bridge.py`; optional runtime and
-probe code is retained but is not called by preview analysis. Original and
-adapted hashes and the adaptation reasons are recorded in
-`docs/summary-semantic-manifest-20261028.json`. This package resolves inside the
-formal distribution and has no runtime dependency on the prototype checkout.
-
-The same extension vendors 29 pure semantic projection modules from
-`semantic_studio` and the original `flow-optimizer.js`, `source-runtime.js` and
-`generic-semantic.js` into `studio/public/preview`. The 32 source-identical files
-and their hashes are listed in `docs/summary-native-view-manifest-20261028.json`.
-The Studio wrapper, panel and native dispatch are recorded separately as
-integration changes. No original semantic HTML, sidebar or legacy renderer is
-loaded as a second Studio canvas.
-The shared router and graph engine also incorporate Summary's bounded native
-search and physical-port candidate options, with adaptations and original
-hashes recorded in the same native manifest. Studio's existing endpoint,
-ordered-waypoint and canonical binding guards remain in effect.
-
-The multiformat document reader originally used the source-identical `generic-semantic.js`.
-The 2026-10-29 Studio adaptation (native-semantic/22) attaches verified,
-expression-only callable/receiver inspection subtrees to the original opaque
-call's source details. These syntax cards and arrows do not appear on the
-computation canvas or expansion tree. Structural inspection remains available;
-any non-syntax incident dependency vetoes attachment. Canonical nodes, edges,
-operand bindings and unknown status remain unchanged and fully accounted for.
-The earlier renderer 21 explanation wrapper is superseded by this policy.
-Source cuts also place predecessor-free, nonmutable resource reads near their
-first consumers and use a larger bounded routing grid and graph-size-based
-routing budget. These are generic policies without model/project name checks
-or source execution. Prior affected layouts migrate with provenance preserved.
-Current hashes are in the integration manifest; the native manifest retains
-the original migration baseline. Checks are recorded in
-`docs/evidence/inspection-connections-20261029/`.
-The subsequent native-semantic/23 adaptation adds reversible local canonical
-source cuts for selected visible nodes, including semantic leaves without a
-stable expansion button. The canvas context menu uses the existing native
-Worker, route/accounting checks, history and document persistence. Canonical
-membership and resource annotations determine scope; labels and model names
-do not. Hierarchy colors follow committed canvas presentation, and original
-SVG operator glyphs are reading aids rather than new semantic facts. See
-`docs/node-atomic-menu-and-hierarchy-20261029.md` for notation references and
-current validation. Integration hashes record these local adaptations.
-The native-semantic/24 revision closes local atomic scopes over canonical
-source containment and preserves the same source units, containers and wires
-as global source expansion. It rebuilds older partial atomic layouts with
-provenance retained. Hierarchy squares are the default; original SVG symbols
-remain an optional presentation preference in the View menu.
-The 2026-10-30 native-semantic/25 adaptation explicitly attaches parameter-read
-dependencies to consumer details before presentation bundling and routing.
-Canonical weights, edges and operand slots remain intact; data, masks, buffers
-and control dependencies are not removed by color. Affected saved layouts
-recompile with prior geometry retained as provenance. Source-independent and
-43-configuration checks are recorded in
-`docs/parameter-dependency-presentation-20261030.md`.
-The same renderer's 2026-10-30 performance adaptation reuses privately built
-source/state projections and view templates with bounded caches. Mixed atomic
-scopes share immutable canonical analysis; source identity, mutable geometry,
-Worker transport, saved-layout validation and canonical accounting remain
-independent. Measurements and limits are recorded in
-`docs/frontier-performance-20261030.md`.
-`studio-documents.js`, the imported-document provenance contract and retained
-Studio import/panel wiring are local integration code, documented in
-`docs/summary-documents-integration-20261028.md`. No second semantic renderer or
-original standalone authoring UI is introduced.
+React, React DOM, Scheduler and Monaco dependency versions are fixed by `studio/package-lock.json`. Dependencies are installed separately; their retained license texts follow. Optional Python dependencies are also installed separately from their lock files.
 
 ## react 19.3.0
 
@@ -181,34 +86,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-The 2026-10-28 source-module extension calls the previously vendored Summary
-`authoring.compile_module` unchanged in a bounded formal Python process. The
-original `AuthoringModel.replaceModule`, `recipe` and `restoreConnection` now
-drive retained Studio inspector controls. No original standalone server or
-authoring renderer is embedded. Current source, adaptation and independent
-verification are recorded in `docs/summary-source-authoring-integration-20261028.md`
-and `docs/summary-source-authoring-manifest-20261028.json`.
 
-The local assembly extension invokes Summary's unchanged `authoring.certify_assembly`
-and `contracts.recognize_contracts` in the formal bounded static process. The
-new bridge, strict derived-result binding and retained Studio folding panel are
-formal adaptations documented in `docs/summary-local-assembly-integration-20261028.md`
-and `docs/summary-local-assembly-manifest-20261028.json`.
-
-2026-10-28 D0 接管适配：Studio 宿主退出旧 formal preview Scene/指针/相机职责，保留面板并委托 Summary 的原生端口、布线与手势。Summary 副本的 app/bridge 新增统一 cancel-gesture 与 pan camera rollback；来源、改动前副本及当前验证见 `docs/summary-preview-retirement-integration-20261028.md`。32 个已登记原版原生 JS 模块未改动。
-
-2026-10-28 generic catalog: copied Summary_Merge's original 43 IR files, one semantic presentation profile and catalog JSON byte-for-byte under the authorized migration. The generated Studio index and inspector adapt loading and enforce current resource limits; source paths remain provenance. File hashes: `docs/summary-catalog-assets-manifest-20261028.json`. This does not certify archived runtime observations or authorize source commits.
-
-2026-10-28 evidence-view adaptation: retained Studio folding controls now select Summary's native source/runtime/merged state and archived run index. The bridge validates transitions and preserves exact latent object identity across modes. The 32 original native JS modules remain unchanged; no prototype executor is enabled. Adaptation, limits and independent evidence: `docs/summary-evidence-views-integration-20261028.md`.
-
-2026-10-28 compact-state adaptation: Studio navigation rows reference exact IDs in the already-carried canonical IR; native session snapshots share recursively frozen evidence through Summary's unchanged cloneGeometry. Formal host adaptation and independent comparisons are recorded in `docs/summary-compact-state-integration-20261028.md`. All 32 original native modules remain byte-identical.
-
-
-## 原生测量驱动局部细化（2026-10-28）
-
-Summary 的原版 adaptive-frontier/5 现由 studio-adaptive.js 接到唯一原生画布；候选比较使用实际图元文字、精确操作数绑定和成功的物理路径。Studio 保留右侧折叠面板，增加开关、策略、采用/拒绝回执和手动收起入口。保存有效请求与开启前基线；关闭恢复原请求，重开独立校验已保存布局。详细范围、来源及验证见 `docs/summary-adaptive-view-integration-20261028.md`。新 CPU、大图完整压力与 D1 仍未完成。
-
-## Monaco source workbench (2026-10-29)
+## Monaco source workbench
 
 Monaco Editor 0.57.0 is loaded locally on demand for Python editing. It includes VSCode editing components, not a Python language server. DOMPurify is fixed to 3.4.17; all versions are locked in studio/package-lock.json.
 

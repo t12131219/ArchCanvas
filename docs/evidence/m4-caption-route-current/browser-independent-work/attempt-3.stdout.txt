@@ -1,1 +1,0 @@
-{"cameraDirections":4,"captures":22,"nodeDirections":4,"passed":515,"total":515}

@@ -1,1 +1,0 @@
-{"captures": 25, "moveDirections": 4, "panDirections": 4, "counterexamples": 21, "maxBends": 4, "script": "index-CIVB6v-J.js"}

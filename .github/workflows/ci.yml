@@ -1,17 +1,14 @@
-name: Regression checks
+name: Build and regression
 on:
   push:
   pull_request:
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: regression-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
-  regression:
+  checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,42 +19,24 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: studio/package-lock.json
-      - name: Prepare project interpreter
-        run: python -m venv .venv
+      - name: Check current runtime assets
+        run: python -B scripts/check_assets.py
+      - name: Install publication test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2 fonts-noto-cjk
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements.lock
       - name: Install locked frontend dependencies
         run: npm ci
         working-directory: studio
-      - name: Build and audit current frontend
+      - name: Build, audit and test frontend
         run: |
           npm run build
           npm run audit:preview
+          npm test
         working-directory: studio
-      - name: Full frontend regression
-        shell: bash
-        run: npm test 2>&1 | tee "$RUNNER_TEMP/frontend-tests.log"
-        working-directory: studio
-      - name: Static and real HTTP regression
-        shell: bash
+      - name: Backend regressions
         env:
-          PYTHONPATH: src:tests
-        run: >-
-          .venv/bin/python -m unittest -v
-          test_doctor_summary
-          test_runtime_analysis
-          test_runtime_observation.RuntimeProfileValidationTests
-          test_authoring test_custom_modules test_source_preservation
-          test_source_rule_registry_atomic test_config_activation_http
-          test_readiness_fixes test_summary_authoring_http
-          test_summary_runtime_http test_preview_bundle_budgets
-          2>&1 | tee "$RUNNER_TEMP/python-tests.log"
-      - name: Archive inventory
-        if: always()
-        run: python scripts/evidence_index.py --output "$RUNNER_TEMP/evidence-index.json"
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: regression-diagnostics
-          path: |
-            ${{ runner.temp }}/evidence-index.json
-            ${{ runner.temp }}/frontend-tests.log
-            ${{ runner.temp }}/python-tests.log
+          PYTHONPATH: src
+        run: .venv/bin/python -B -m unittest discover -s tests -v

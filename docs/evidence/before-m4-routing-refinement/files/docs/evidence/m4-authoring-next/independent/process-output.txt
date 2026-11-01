@@ -1,1 +1,0 @@
-{"positive": 8, "draftRejected": 50, "oracleRejected": 21, "failed": 0}

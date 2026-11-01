@@ -1,15 +1,35 @@
-__pycache__/
-*.py[cod]
+# Local environments and dependencies
 .venv/
 .venv-runtime/
-*.egg-info/
-.pytest_cache/
+venv/
 node_modules/
+
+# Runtime state and generated output
+.archcanvas/
 dist/
 build/
-.archcanvas/
+*.egg-info/
+__pycache__/
+*.py[cod]
 *.tsbuildinfo
-# Keep historical tracked snapshots; prevent new recursive evidence copies.
-docs/evidence/**/docs/evidence/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+*.log
+
+# Local diagnostics and temporary test builds
+docs/evidence/
+docs/validation/
 studio/.*-regression-*/
 studio/.*-independent-*/
+studio/.source-authoring-ui-*/
+studio/.m4-hierarchy-probe-*/
+
+# Local editor and machine configuration
+.idea/
+.vscode/
+.DS_Store
+.env
+.env.*
+!.env.example

@@ -1,5 +1,0 @@
-{
-  "status": "failed-truncated-readback",
-  "operation": "getAttribute/read-only textarea value",
-  "reason": "Returned string capped around200k; JSON.parse failed; preserved original, extracting smaller readonly chunks next."
-}

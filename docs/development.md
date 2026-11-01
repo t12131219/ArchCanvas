@@ -1,92 +1,46 @@
-# Current development and validation
+# Development
 
-The maintained source tree, local frozen bundles and historical acceptance
-receipts are distinct versions. Start with the Skill launcher doctor summary,
-then inspect actual runtime capabilities. Default native assembly and formal
-Python authoring have separate contracts; see
-[runtime compatibility](../skills/archcanvas/references/runtime-compatibility.md).
-The [2026-11-01 maintenance report](maintenance-20261101.md) records this change's
-actual test results and remaining gaps.
-The [Summary routing and local acceptance follow-up](summary-acceptance-20261101.md)
-records the later Transformer fix, current browser observations and open gates.
-The [Summary legacy cleanup](summary-legacy-cleanup.md) lists retired formal-DOM
-panels, fixed-frontier protocols and samplers. Use the current Summary module
-scopes; historical benchmark/study and monochrome-matrix instructions no longer
-describe runnable development entry points.
+Use Python 3.11+ and Node.js 24+. Run commands from the repository root.
 
-## Local build
+## Build
 
-Use Python 3.11+ and Node 24+. In a new checkout:
+```bash
+python3 -m venv .venv
+cd studio
+npm ci
+npm run build
+npm run audit:preview
+cd ..
+python3 -B scripts/check_assets.py
+```
 
-    python3 -m venv .venv
-    cd studio
-    npm ci
-    npm run build
-    npm test
-    npm run audit:preview
-    cd ..
-    PYTHONPATH=src .venv/bin/python -m archcanvas_cli serve --data-dir /absolute/state-root
+For frontend development, start the Python service on port 8765, then run `npm run dev` in `studio`. Vite forwards `/api` to that service. Rebuild the frontend before serving its production files.
 
-Static analysis needs no PyTorch and never runs model source. Publication and
-kernel-isolated CPU execution remain optional separately installed profiles;
-their dependency locks and capability checks are documented in the README.
-One service owns each state root.
+## Tests
 
-## Regression and CI scope
+Install `requirements.lock` into `.venv` and provide system Cairo before running the complete backend suite; several export tests exercise actual PDF/PNG conversion. The CI workflow installs these dependencies.
 
-The GitHub workflow builds with locked dependencies, runs the complete Node test
-entry and selected Python static/real-loopback regressions. It does not certify
-three-host Agent E2E, a full browser matrix, publication review or actual model
-execution. Summary HTTP cancel tests use mocks; actual CPU tests require the
-explicit Linux profile. Skipped tests are not execution evidence.
+```bash
+PYTHONPATH=src .venv/bin/python -B -m unittest discover -s tests -v
+cd studio
+npm test
+```
 
-For the full backend collection in a suitably configured local environment:
+Tests tied to archived releases, removed migration snapshots and historical acceptance reports are excluded from this source distribution. Retained tests cover runtime functionality. Optional Cairo/PDF, browser and isolated CPU checks may require additional dependencies or environment support; report their skips separately.
 
-    PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v
+`python3 -B scripts/check_assets.py` checks current catalogs, pinned model and component bytes, source resources and browser script entries. It needs no third-party Python packages. `npm run audit:preview` checks frontend module boundaries.
 
-Keep fail/skip counts with the exact commit and build. Do not add unrelated
-historical counts together or regenerate acceptance evidence to hide failures.
-The large Transformer's default view now finishes legal initial routes before
-optional aesthetic searches; its 82 nodes/80 edges pass strict geometry with no
-pending or failed routes. Apply and interaction tests require strict validation
-for both Transformer and MLP. An intentionally interrupted graph must retain
-honest diagnostics and cannot publish a successful Apply when full validation
-fails. These bounded checks do not certify every possible frontier or publication
-quality. Parameter-read arrows are exact consumer
-annotations and remain covered by the canonical accounting tests.
+The optional browser export check accepts an existing browser through `ARCHCANVAS_TEST_BROWSER` and Playwright through `ARCHCANVAS_TEST_PLAYWRIGHT`.
 
-The optional DOM export check accepts an existing browser through
-`ARCHCANVAS_TEST_BROWSER` and Playwright through `ARCHCANVAS_TEST_PLAYWRIGHT`.
-Use the installed headless-shell when the full Chromium executable cannot start;
-report skipped/unavailable browser checks explicitly.
+## Runtime utilities
 
-The generated current AST test fixture uses repository-relative parser paths;
-after changing its declared parser dependencies, regenerate it and rerun its
-independent graph assertions:
+- `scripts/canvas_bridge.mjs` implements CLI/service canvas operations using the TypeScript core.
+- `scripts/export_canvas.mjs` exports a saved canvas document.
+- `scripts/atomic_export.mjs` stages export files and receipts together, with recovery for ordinary failures.
+- `scripts/build_source_component_library.py` rebuilds the built-in component library from the bundled semantic catalog.
 
-    .venv/bin/python -I -B studio/scripts/generate-preview-ast-fixture.py
+## Repository contents
 
-## Distribution
+Commit source, dependency locks, current model data, tests, documentation and licenses. Do not commit `.venv`, `.venv-runtime`, `node_modules`, `studio/dist`, `.archcanvas`, caches or test-generated scratch directories. The built frontend copies public assets into `studio/dist`; keeping both in Git would duplicate them.
 
-New candidates carry studio/src, studio/scripts, studio/public and prebuilt
-studio/dist; Python/npm dependencies are installed separately. The bounded
-uncompressed bundle budget is 1280 MiB/20,000 files, including its manifest.
-Historical bundles retain their own inventories.
-
-    python scripts/m5_beta_bundle.py candidate --project-root . --version 0.1.0-beta.7 --output /absolute/new-candidate.tar.gz
-
-The bundle suite includes independent unpacking and rebuilding using explicitly
-reused locked node_modules. That proves source/asset completeness, not a clean
-network install. A rebuilt or otherwise modified frozen directory needs a fresh
-manifest before it can report verified; doctor rejects missing, additional,
-linked and altered files. Rebuilding does not grant a new host/publication claim.
-
-## License and history
-
-Original project code is licensed under [Apache-2.0](../LICENSE). Vendored code,
-model materials and fonts retain their own licenses; consult
-[third-party notices](../THIRD_PARTY_NOTICES.md). Do not relicense third-party
-materials by applying the project license to them.
-
-Historical receipts remain immutable. See the [evidence policy](evidence-policy.md)
-and [baseline index](evidence-index.json) for navigation and external archiving.
+Use a fresh state directory for development HTTP checks. Model paths embedded in bundled IR are provenance labels; do not access external local paths or rewrite digests to make them appear newly verified.

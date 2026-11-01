@@ -1,5 +1,0 @@
-{
-  "passed": true,
-  "report": "/tmp/archcanvas-independent-myym276k/m4-holdout-integrity-report.json"
-}
-EXIT=0

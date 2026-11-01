@@ -1,4 +1,4 @@
-# M3 CPU runtime, installed into .venv-runtime, never a user's model environment.
+# Optional CPU runtime, installed into .venv-runtime, separate from user model environments.
 # torch wheel: https://download.pytorch.org/whl/cpu (official PyTorch CPU index).
 # Remaining packages: official PyPI / PyTorch dependencies, resolved 2026-10-04.
 filelock==3.32.3

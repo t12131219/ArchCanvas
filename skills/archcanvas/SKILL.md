@@ -7,11 +7,11 @@ description: Create source-grounded, publication-style deep learning model diagr
 
 Turn model source into a readable research figure and a persistent canvas that the user can refine directly or through natural language. Prioritize the first view, spatial continuity, object-level editing, and faithful export. Model facts come from source evidence; presentation comes from the canvas document.
 
-Resolve this copy's runtime using `python3 -I -B scripts/archcanvas_runtime.py doctor --summary` from the Skill directory. An installed copy has `archcanvas-install.json` and an embedded release; the source-tree launcher uses its containing formal checkout. A separately copied development Skill requires an explicit `archcanvas-runtime.json` containing an absolute `runtimeRoot`. Never guess a runtime or fall back to the failed prototype. A copied instruction file without a bound runtime cannot deliver a canvas. Use the actual doctor's release version, asset hashes and catalog counts; historical Beta.2 and the current checkout are different versions. M4 human, publication and performance gates and three-host E2E remain open.
+Resolve this copy's runtime using `python3 -I -B scripts/archcanvas_runtime.py doctor --summary` from the Skill directory. An installed copy has `archcanvas-install.json` and an embedded release; the source-tree launcher uses its containing formal checkout. A separately copied development Skill requires an explicit `archcanvas-runtime.json` containing an absolute `runtimeRoot`. Never guess a runtime or fall back to the failed prototype. A copied instruction file without a bound runtime cannot deliver a canvas. Use the actual doctor's version, asset hashes and catalog counts. Source availability does not certify host E2E, publication review or presented performance.
 
 ## Implementation baseline
 
-Build the formal product from scratch around its independent contracts. `ArchCanvas_Model Architecture Studio_Temp` is a failed prototype, not the development runtime or a migration baseline. Do not auto-discover, execute, import, or fall back to it. Its code may be consulted as low-confidence historical evidence; any small candidate reused in the formal runtime needs independent correctness evidence, identified dependencies, and a documented reason. Existing prototype tests or demos alone do not establish that confidence.
+Use this repository's own source, runtime, assets and contracts. Do not discover or fall back to another checkout. Preserve source identities, explicit unknowns and separate visual, source-editing and execution workflows.
 
 ## Choose the workflow
 

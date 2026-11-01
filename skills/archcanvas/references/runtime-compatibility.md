@@ -48,11 +48,6 @@ For a supported Studio service, use the harness's available managed/background p
 
 Report the specific missing runtime or operation and preserve the available source evidence and visual documents. Source-grounded design, visual specifications, reviewable proposals, and development of the new formal implementation can continue within the authorized task. Do not claim a completed interactive bidirectional framework or a successful writeback based on Skill instructions alone. Follow [source-review.md](source-review.md) for semantic changes.
 
-## Failed-prototype reference policy
-
-The failed prototype may be inspected read-only to identify pitfalls or a narrowly scoped candidate implementation. It is not a support matrix, trusted baseline, expected-result oracle, or acceptance evidence for the formal product. Any candidate code requires a stated reason for reuse, dependency/license review, independent verification of its behavior, and validation in the new design before limited incorporation. Default to a fresh implementation when that confidence is absent.
-
-
 ## New authored model drafts
 
 The native Summary and formal Python authoring workspaces have separate contracts:
@@ -68,7 +63,7 @@ For the formal Python paths, check `modelAuthoring`, create and save a draft, an
 
 The development library exposes transparent starting graphs, including MLP, CNN, residual, convolutional, attention, recurrent, embedding, decoder, U-Net and projection variants. Click or drag one from the left library, then edit its ordinary modules, parameters and tensor connections. These are transparent draft graphs built from registered atomic kinds, not opaque whole-network promises or executed models. A new harness must still establish that its actual Studio provides this UI; representative AI trials do not certify human usability or publication quality. The older three-graph statement above remains historical evidence only.
 
-Authoring validation errors may include structured Chinese diagnostics while preserving English technical text. Resolve node/parameter/port targets against actual unique catalog identities; never infer targets from labels. Invalid raw parameter text blocks draft save/generation. Arrangement fits the updated draft and empty search states explain unsupported modules; consult the configured checkout’s `docs/m4-authoring-feedback.md` for source/build-bound UI evidence and open M4 gates.
+Authoring validation errors may include structured Chinese diagnostics while preserving English technical text. Resolve node/parameter/port targets against actual unique catalog identities; never infer targets from labels. Invalid raw parameter text blocks draft save/generation. Arrangement fits the updated draft and empty search states explain unsupported modules; consult the configured checkout’s `docs/usage.md` and actual capability response for the current workflow.
 
 ## Precise canvas handoff
 
@@ -84,4 +79,4 @@ CLI publication stages artifact and receipt together and restores prior files on
 
 Use [source-coverage.md](source-coverage.md) to distinguish display/edit support from semantic lowering. The current implementation projects pure source-draft presentation edits into the original canvas through typed `title`, `alias`, `nodeStyle`, `nodeLayout` and `portLayout` operations. Hidden layout and history persist; opaque operators do not require source generation for those edits. A changed generated-model binding falls back to its independently verified generation workflow. Unresolved conditional regions expose authored branch/module source for inspection without a selected configuration; real configuration evidence remains necessary for choosing an execution path and deeper tensor lowering.
 
-For a new release from a changed development checkout, use `python scripts/m5_beta_bundle.py candidate --project-root ROOT --version VERSION --output ARCHIVE`. This stages fresh asset bindings and verifies the candidate without rewriting the historical checked-in Beta.2 receipt. `pack` remains strict against the selected tree's own release manifest.
+For a source checkout, follow the repository README to install frontend dependencies and build Studio. Historical beta packaging tools are not included in this source distribution.

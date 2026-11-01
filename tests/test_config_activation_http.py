@@ -13,7 +13,7 @@ import unittest
 from urllib.error import HTTPError
 from urllib.request import ProxyHandler, Request, build_opener
 
-from archcanvas_cli.server import ArchCanvasServer
+from archcanvas_cli.server import ArchCanvasServer, runtime_config
 from archcanvas_python import analyze_project
 
 SOURCE = '''from torch import nn
@@ -126,6 +126,10 @@ class ConfigActivationHTTPTests(unittest.TestCase):
         self.assertEqual(self.path.read_bytes(), SOURCE.encode())
 
     def test_activation_real_async_job_serializes_event_free_review(self):
+        config = runtime_config()
+        if os.environ.get("ARCHCANVAS_REQUIRE_RUNTIME") != "1" and (
+                not config or not all(Path(config[key]).is_file() for key in ("interpreter", "dependencyLock"))):
+            self.skipTest("Optional locked CPU runtime is not installed; see docs/runtime.md.")
         code, job = self.request(self.route("activation-jobs"), "POST", {**self.common("ReLU"), "activation": "GELU", "inputSpec": copy.deepcopy(SPEC)})
         self.assertEqual(code, 202, job)
         self.assertNotIn("cancelEvent", job)
