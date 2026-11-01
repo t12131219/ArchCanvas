@@ -1,6 +1,12 @@
 # Alpha 验收记录与限制
 
-## 当前状态：受限 memory 连线连续性（2026-10-06）
+本文为历史 Alpha 验收记录，各项结果仅适用于其绑定版本。当前构建与验证入口见
+[development.md](development.md)，已退役入口见 [Summary 旧功能清理](summary-legacy-cleanup.md)。
+下文旧前沿编号、黑白预设矩阵、研究席位和性能采样命令不适用于当前 Summary。
+历史证据和失败原件保持原样；完整浏览器矩阵、真人、出版、性能和宿主 E2E
+仍按实际证据登记，不因旧工具退役而通过。
+
+## 历史状态：受限 memory 连线连续性（2026-10-06）
 
 当前 `index-CU5JhnoS.js` / `index--unhoRTb.css` 的[统一收据](evidence/m4-memory-continuity-current/checks-final-attempt-2/receipt.json)为 Studio **436/436**、fail/skip/cancel0，strict TypeScript/Vite exit0、publication **11/11** skip0；115源码/测试/配置＋3dist＝**118**，另11publication输入。36历史core＋1detail夹具单独冻结，115不是完整传递依赖清单。见[阶段](m4-memory-continuity.md)、[门](evidence/m4-current-gate-audit.json)及[source seal](evidence/m4-memory-continuity-current/implementation-work/source-seal-attempt-2/report.json)。
 

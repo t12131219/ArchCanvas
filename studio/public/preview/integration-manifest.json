@@ -1964,8 +1964,8 @@
     },
     {
       "path": "ui-en.json",
-      "bytes": 102569,
-      "sha256": "5116a55c733c5c32d2b55b4ce31a1803625aefb9d70871a642e72394e0a5c0e8"
+      "bytes": 99534,
+      "sha256": "4e741671209588983908d49a718e6e3af4a2a4d3bab1daf24313debc24563842"
     },
     {
       "path": "yworks_edge_router_lab/app.js",

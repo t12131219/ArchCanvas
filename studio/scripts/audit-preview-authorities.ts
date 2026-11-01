@@ -8,8 +8,8 @@ export function auditPreviewAuthorities(studioRoot: string) {
   const root=path.resolve(studioRoot),base=path.join(root,'src');
   const files=fs.readdirSync(base,{recursive:true}).map(String).filter(n=>/\.(ts|tsx)$/.test(n)).map(n=>path.join(base,n));
   const all=new Set(files),edges=new Map<string,string[]>();
-  const unresolved: {file:string;expression:string}[]=[],retiredDeclarations:{file:string;name:string}[]=[];
-  const retiredNames=new Set(['prepareMovePreview','previewMoveScene','planLayoutRecovery']);
+  const unresolved: {file:string;expression:string}[]=[],retiredDeclarations:{file:string;name:string}[]=[],retiredDomQueries:{file:string;selector:string}[]=[];
+  const retiredNames=new Set(['prepareMovePreview','previewMoveScene','planLayoutRecovery','PerfBenchmarkPanel','StudyPanel','runStudioBenchmark','NativePerformanceSession']);
   const rel=(file:string)=>path.relative(root,file).split(path.sep).join('/');
   for(const file of files){
     const ast=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true),imports:string[]=[];
@@ -26,7 +26,8 @@ export function auditPreviewAuthorities(studioRoot: string) {
         const target=path.resolve(path.dirname(file),spec),resolved=[target,target+'.ts',target+'.tsx',path.join(target,'index.ts')].find(value=>all.has(value));
         if(resolved)imports.push(resolved);
       }
-      if((ts.isFunctionDeclaration(node)||ts.isVariableDeclaration(node))&&node.name&&ts.isIdentifier(node.name)&&retiredNames.has(node.name.text))retiredDeclarations.push({file:rel(file),name:node.name.text});
+      if((ts.isFunctionDeclaration(node)||ts.isVariableDeclaration(node)||ts.isClassDeclaration(node))&&node.name&&ts.isIdentifier(node.name)&&retiredNames.has(node.name.text))retiredDeclarations.push({file:rel(file),name:node.name.text});
+      if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&['querySelector','querySelectorAll','closest'].includes(node.expression.name.text)&&node.arguments[0]&&ts.isStringLiteral(node.arguments[0])&&node.arguments[0].text.includes('.publication-scene'))retiredDomQueries.push({file:rel(file),selector:node.arguments[0].text});
       ts.forEachChild(node,visit);
     }
     visit(ast);edges.set(file,[...new Set(imports)]);
@@ -34,7 +35,7 @@ export function auditPreviewAuthorities(studioRoot: string) {
   const reachable=new Set<string>();
   function walk(file:string){if(reachable.has(file))return;reachable.add(file);for(const child of edges.get(file)||[])walk(child);}
   const entry=path.join(base,'main.tsx');if(all.has(entry))walk(entry);
-  const retiredPaths=['src/core/movePreview.ts','src/core/layoutRecovery.ts'];
+  const retiredPaths=['src/core/movePreview.ts','src/core/layoutRecovery.ts','src/PerfBenchmarkPanel.tsx','src/StudyPanel.tsx','src/perfBenchmark.ts','src/nativePerformance.ts'];
   const existingRetiredPaths=retiredPaths.filter(file=>fs.existsSync(path.join(root,file)));
   const testOnlyImports=files.flatMap(file=>{
     const ast=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true),found:{file:string;specifier:string}[]=[];
@@ -43,11 +44,11 @@ export function auditPreviewAuthorities(studioRoot: string) {
       ts.forEachChild(node,visit);
     }visit(ast);return found;
   });
-  return {ok:all.has(entry)&&!unresolved.length&&!existingRetiredPaths.length&&!retiredDeclarations.length&&!testOnlyImports.length,
+  return {ok:all.has(entry)&&!unresolved.length&&!existingRetiredPaths.length&&!retiredDeclarations.length&&!retiredDomQueries.length&&!testOnlyImports.length,
     scope:'Studio source imports, exports, literal dynamic imports and URL/Worker entries, including type dependencies; not a whole-product feature or performance certificate',
     entry:'src/main.tsx',modules:files.length,reachableModules:reachable.size,
     reachable:[...reachable].map(rel).sort(),unreachable:files.filter(file=>!reachable.has(file)).map(rel).sort(),
-    unresolvedDynamicImports:unresolved,existingRetiredPaths,retiredDeclarations,testOnlyImports,
+    unresolvedDynamicImports:unresolved,existingRetiredPaths,retiredDeclarations,retiredDomQueries,testOnlyImports,
     sourceEdges:[...edges].map(([from,to])=>({from:rel(from),to:to.map(rel)}))};
 }
 

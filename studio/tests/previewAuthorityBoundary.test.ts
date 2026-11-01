@@ -25,3 +25,9 @@ test('unresolved dynamic imports and production links into retired test support 
  const root=fixture(t,{'main.tsx':"const target='./opaque.ts'; void import(target); import '../tests/retired-preview/movePreview.ts';"});
  const report=auditPreviewAuthorities(root);assert.equal(report.ok,false);assert.equal(report.unresolvedDynamicImports.length,1);assert.equal(report.testOnlyImports.length,1);
 });
+test('an unmounted legacy panel or renamed observer of the retired formal DOM fails the production audit',t=>{
+ const root=fixture(t,{'main.tsx':'export const current=1;','StudyPanel.tsx':'export const unused=1;','renamed-observer.ts':"export function sample(){return document.querySelector('.publication-scene svg');}"});
+ const report=auditPreviewAuthorities(root);assert.equal(report.ok,false);
+ assert.deepEqual(report.existingRetiredPaths,['src/StudyPanel.tsx']);
+ assert.deepEqual(report.retiredDomQueries,[{file:'src/renamed-observer.ts',selector:'.publication-scene svg'}]);
+});

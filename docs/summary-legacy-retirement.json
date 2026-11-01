@@ -1,0 +1,234 @@
+{
+  "baselineCommit": "e830db6c713439cfef48509c5606f942f42b9a9b",
+  "reason": "User-authorized removal of tools tied to retired formal Canvas DOM/frontiers; current Summary is the view authority.",
+  "files": [
+    {
+      "path": "studio/src/PerfBenchmarkPanel.tsx",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 4104,
+      "sha256": "e93b5abc67d7ca42e38ce30040b199c86cdb5a27a25b0d7e7b24971ac50971d9"
+    },
+    {
+      "path": "studio/src/StudyPanel.tsx",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 8750,
+      "sha256": "c6f000e2d96be9f0d2ed6502838e6fef51b43c240ed005956d3cd53e6dab2cb6"
+    },
+    {
+      "path": "studio/src/perfBenchmark.ts",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 9276,
+      "sha256": "717d31cc065e8e4a41cb5cdbb1a80d92314eb35a203a54afa514e57d741cd382"
+    },
+    {
+      "path": "studio/src/nativePerformance.ts",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 11245,
+      "sha256": "291c85482cbad512ebb46c2894d370eee4bb836dec3d6c5d95d527c3a35b533c"
+    },
+    {
+      "path": "studio/tests/native-performance.test.ts",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 10817,
+      "sha256": "a935052b7f1bd1deb8c937f3859b38f635ed863adf50afc6c3ea00e4d9e3a0df"
+    },
+    {
+      "path": "studio/tests/native-matching-independent.test.ts",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 8031,
+      "sha256": "09d925e0a1bb1694e3979c95a59ad4bf77cdcd110969ff36cde4662a663bd032"
+    },
+    {
+      "path": "studio/tests/perf-receipt.test.ts",
+      "group": "unmounted-formal-scene-panels",
+      "bytes": 3123,
+      "sha256": "21317ba07a6a4e1c5650c8854ce2c0a0619529ab729e61645711b9318a37c0eb"
+    },
+    {
+      "path": "scripts/browser_visual_matrix.py",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 32360,
+      "sha256": "6f79036c388a0a725d27a5f3e063eda1b13f7f370a95e735565cd3aff921afac"
+    },
+    {
+      "path": "scripts/browser_visual_core.mjs",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 1252,
+      "sha256": "78a99c8a80784bad9b2877a1d170ec0a66997f2f74aea3c82df55d3ab55dfd05"
+    },
+    {
+      "path": "scripts/check_browser_visual_matrix.py",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 3293,
+      "sha256": "d56fbf44b4f8163ca60f85b34ff6633b0c131632daecdf1bd81402bb8aba2e05"
+    },
+    {
+      "path": "scripts/check_visual_golds.py",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 11208,
+      "sha256": "6abfffea154add9106d4ad72915e5bb9f6adf7a841d116d023c4ead1d2b781b5"
+    },
+    {
+      "path": "scripts/prepare_hierarchy_matrix_capture.py",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 23310,
+      "sha256": "9bc10af7417f9615cf5ead296f34dffa21a34e8003b03368d6d3124ae202166a"
+    },
+    {
+      "path": "tests/test_browser_visual_matrix.py",
+      "group": "fixed-formal-frontier-matrix",
+      "bytes": 12838,
+      "sha256": "154a0b43824d01a3d653e9e0bb8fffefcae3a3c0f262f115853dec05ad321ee4"
+    },
+    {
+      "path": "scripts/research_trial.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 28613,
+      "sha256": "3ed1c838622c5afb9d639ffb188768e3d8cda6e7516f9184715aee6f01935876"
+    },
+    {
+      "path": "scripts/research_trial_core.mjs",
+      "group": "formal-canvas-research-slots",
+      "bytes": 1721,
+      "sha256": "1b613e34976f12a2009dae28805094d54652ecff687dea93dac9f402aae7caf3"
+    },
+    {
+      "path": "scripts/research_trial_readiness.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 12896,
+      "sha256": "4cec91cdbc0dcdb2e6dae25ac168034a0ea5324a1fd233824aafa474130a7142"
+    },
+    {
+      "path": "scripts/check_research_trial.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 3515,
+      "sha256": "abf9d33171ea9a61a7821d8245225e0844ab555e171865e16590c565f3d4a555"
+    },
+    {
+      "path": "scripts/summarize_research_tasks.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 8154,
+      "sha256": "25b2429778a50a21009d29ba3262e9b657cb2bdcc173f7ebc9cec30b8cb5b2ec"
+    },
+    {
+      "path": "tests/test_research_trial.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 14438,
+      "sha256": "1a8d002aef4a398625696e99fc0fa397c41fea19ab3b527d42cc79318c48b943"
+    },
+    {
+      "path": "tests/test_research_trial_readiness.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 3772,
+      "sha256": "bce4830a13470c7107b992876220e6509dd9b91340db239b0487bf58ef91b5cf"
+    },
+    {
+      "path": "tests/test_research_summary.py",
+      "group": "formal-canvas-research-slots",
+      "bytes": 7977,
+      "sha256": "1f222373affc2f1ca724ea1b3ca3c022c3bcdcb79ecbfd7090e5f6999f76c461"
+    },
+    {
+      "path": "scripts/m4_input_harness.py",
+      "group": "formal-dom-measurement",
+      "bytes": 3709,
+      "sha256": "79d1a3bcd38684e1d886c3237c261c17a713ec688ff5f0d1c0f2ce1eea3f7fa4"
+    },
+    {
+      "path": "scripts/m4_input_observer.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 17697,
+      "sha256": "b7b8b11da1d267caf5fe18050545bd70a798ea395a492a470349a81041a981b0"
+    },
+    {
+      "path": "scripts/m4_input_support/control.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 3989,
+      "sha256": "752b565fda3c5bcf90a003cb1445c2a5117a3f6cc5e8051eec306379ef3132d4"
+    },
+    {
+      "path": "scripts/m4_input_support/control.html",
+      "group": "formal-dom-measurement",
+      "bytes": 1210,
+      "sha256": "dd214bb2b2cc75fa37c8a04db65af59e8f6bb19458c2a802cca600d5ce99b44f"
+    },
+    {
+      "path": "scripts/m4_input_support/harness.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 2475,
+      "sha256": "f0307f5daa3ec76f8969f2f7852e687e16c125d0a2c14c73dd9504234bb4e2d5"
+    },
+    {
+      "path": "scripts/m4_input_support/harness.html",
+      "group": "formal-dom-measurement",
+      "bytes": 2531,
+      "sha256": "ed0884ac60f7fe7d60f32d2f784b83f9e68861741c941affd25c07dfe7d86593"
+    },
+    {
+      "path": "scripts/validate_studio_performance.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 6796,
+      "sha256": "0c5dc2f9317ad674610c170cba152001c66826ab7f57d87a96b8aa08636e3baf"
+    },
+    {
+      "path": "scripts/validate_native_performance.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 7239,
+      "sha256": "2d6e64042d3a925fbb22e48bf9dbe2a63bf4cedfd24e8b8c849851943cf56046"
+    },
+    {
+      "path": "scripts/validate_input_observation.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 30311,
+      "sha256": "e5d024b23152efd1ed4b82048a55f957d75642069c603dbea6451c7c2111c32d"
+    },
+    {
+      "path": "scripts/validate_continuous_observation.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 6054,
+      "sha256": "4e082864f2ae6d5e831874494f349a1d421c9eae2821cfecb73338983c29a408"
+    },
+    {
+      "path": "scripts/validate_scheduling_control.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 19229,
+      "sha256": "8761d136aaa9b3172b708670c7bf7cda9716dd4c2dfe01785c0bcf4c80d22557"
+    },
+    {
+      "path": "scripts/validate_automation_task.py",
+      "group": "formal-dom-measurement",
+      "bytes": 33860,
+      "sha256": "2b42d379ce768bbbc7b43a2ea462c201e7d74fad4ec71f868ac744380d8edf50"
+    },
+    {
+      "path": "tests/m4_input_observer_trigger.test.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 6556,
+      "sha256": "53a485a4bb831f294cd3e3470dc2248e1fadceaaae3ce5b09b4e08ae240c3618"
+    },
+    {
+      "path": "tests/m4_input_observation.test.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 21784,
+      "sha256": "eb61a82f3d2f9624a5f882a2fda23dac8770c226b35ef07e7acb04214e0f75f1"
+    },
+    {
+      "path": "tests/m4_continuous_projection_independent.test.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 21195,
+      "sha256": "70342015002e1b29d99dd6746bc4168f3bf2b34969cae15649d1502902495af7"
+    },
+    {
+      "path": "tests/test_scheduling_control.mjs",
+      "group": "formal-dom-measurement",
+      "bytes": 8099,
+      "sha256": "15ee03454c7d4dd55acc8a73bdfb88a9a38e7ebdc8767c1a76a27ae6e514f05a"
+    },
+    {
+      "path": "tests/test_automation_task_audit.py",
+      "group": "formal-dom-measurement",
+      "bytes": 8489,
+      "sha256": "e172d643c56c3de10013ea0fa930b4350a599ff58c860d72db66ce33784ae5f7"
+    }
+  ]
+}

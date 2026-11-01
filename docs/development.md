@@ -9,6 +9,10 @@ The [2026-11-01 maintenance report](maintenance-20261101.md) records this change
 actual test results and remaining gaps.
 The [Summary routing and local acceptance follow-up](summary-acceptance-20261101.md)
 records the later Transformer fix, current browser observations and open gates.
+The [Summary legacy cleanup](summary-legacy-cleanup.md) lists retired formal-DOM
+panels, fixed-frontier protocols and samplers. Use the current Summary module
+scopes; historical benchmark/study and monochrome-matrix instructions no longer
+describe runnable development entry points.
 
 ## Local build
 
