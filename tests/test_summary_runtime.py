@@ -52,6 +52,29 @@ class SummaryRuntimeActualTests(unittest.TestCase):
         cls.result = observe_summary({'model.py': SOURCE}, 'model:RuntimeFixture', SPEC, CONFIG)
         if cls.result['receipt']['status'] != 'passed': raise AssertionError(cls.result['receipt'].get('reason'))
 
+    def test_fresh_replay_rejects_equal_tensor_leaves_with_changed_output_contract(self):
+        for first, second in [("{'left': x}", "{'right': x}"), ("[x]", "(x,)"),
+                              ("{'nested': [x, {}]}", "{'nested': [x, []]}")]:
+            source = f'''from torch import nn
+class ChangingOutput(nn.Module):
+    count = 0
+    def __init__(self):
+        super().__init__()
+        ChangingOutput.count += 1
+        self.first = ChangingOutput.count == 1
+    def forward(self, x):
+        return {first} if self.first else {second}
+'''
+            spec = {'schema': 'semantic-inputs/1', 'constructor': {}, 'modes': ['eval'],
+                    'cases': [{'id': 'tree-contract', 'seed': 7,
+                               'inputs': {'x': {'shape': [1], 'dtype': 'float32', 'fill': 'ones'}}}]}
+            with self.subTest(first=first, second=second):
+                result = observe_summary({'model.py': source}, 'model:ChangingOutput', spec, CONFIG)
+                self.assertEqual(result['receipt']['status'], 'failed')
+                self.assertFalse(result['receipt']['runtimeVerified'])
+                self.assertIsNone(result['document'])
+                self.assertIn('replay output mismatch', result['receipt']['reason'])
+
     def test_real_aten_tensor_producers_shared_calls_and_source_stack_match_handwritten_fixture(self):
         receipt = self.result['receipt']; self.assertTrue(receipt['runtimeVerified'])
         self.assertEqual(receipt['source_files'], {'model.py': SOURCE})

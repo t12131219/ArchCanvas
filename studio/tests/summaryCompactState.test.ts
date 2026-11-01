@@ -20,7 +20,9 @@ fixture.bundle=JSON.parse((await promisify(execFile)('python3',['-I','-S','-B','
 const catalog=JSON.parse(readFileSync(new URL('data/semantic/studio-catalog.json',base),'utf8'));
 const irFor=(model:any)=>JSON.parse(readFileSync(new URL('data/semantic/'+model.ir.path,base),'utf8'));
 function build(ir:any){return N.decorate(G.build(ir,N.state('overview')));}
-function expandedHierarchy(graph:any){return {...graph,semanticHierarchy:{nodes:N.nodes(graph)}};}
+// Full rows must include the native appearance used by compact navigation;
+// hidden full-detail rows do not yet have a rendered fill of their own.
+function expandedHierarchy(graph:any){return {...graph,semanticHierarchy:{nodes:N.nodes(graph).map((node:any)=>({...node,fill:node.fill||G.appearance(node.semantic||node).fill}))}};}
 function matching(snapshot:any,architecture:any,source:any){return {signature:previewMappingSignature(snapshot),coverage:previewMappingCoverage(snapshot,architecture,source),bindings:[...previewUniqueNodeBindings(architecture,snapshot.graph,source)]};}
 
 test('all 43 canonical models retain identical Studio hierarchy and opaque panel documents with compact navigation rows',()=>{

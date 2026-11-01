@@ -44,7 +44,15 @@ test('nested overrides use specificity and whole-model atoms reach all 3371 orig
  const child=ir.nodes.find((n:any)=>n.label==='self_attn'&&inside(n.id,encode)).id,cuts=[{id:encode,level:'source'},{id:child,level:'f0'},{id:decode,level:'f1'}];
  const graph=check(build(cuts));assert.ok(graph.nodes.filter((n:any)=>inside(n.id,child)).length<ir.nodes.filter((n:any)=>inside(n.id,child)).length);
  equal(copy(G.layoutSnapshot(check(build(cuts.slice().reverse())))),copy(G.layoutSnapshot(graph)));
- const all=check(build([{id:ir.nodes.find((n:any)=>!n.parent).id,level:'source'}]));assert.equal(all.nodes.length,ir.nodes.length);assert.equal(all.edges.length,ir.edges.length);
+ const all=check(build([{id:ir.nodes.find((n:any)=>!n.parent).id,level:'source'}]));assert.equal(all.nodes.length,ir.nodes.length);
+ // Parameter reads are exact resource annotations, not extra activation wires.
+ const parameters=ir.edges.filter((e:any)=>e.kind==='parameter-read'),cut=G.expected(all);
+ equal(all.edges.map((e:any)=>e.id).sort(),ir.edges.filter((e:any)=>e.kind!=='parameter-read').map((e:any)=>e.id).sort());
+ equal(copy(cut.edge_accounting.attached).sort(),parameters.map((e:any)=>e.id).sort());
+ for(const edge of parameters){
+  const notes=[...cut.annotations.values()].flat().filter((note:any)=>note.annotation_kind==='parameter-dependency'&&note.edge?.id===edge.id);
+  assert.equal(notes.length,1);equal(copy(notes[0].edge),edge);
+ }
  for(const e of G.expected(all).edges){const raw=ir.edges.find((v:any)=>v.id===e.id);for(const key of ['source','target','source_port','target_port','kind','condition','evidence'])equal(copy(e[key]??null),copy(raw[key]??null));}
 });
 test('module commands, reset, preset and back keep independent history and reject forged scopes',()=>{

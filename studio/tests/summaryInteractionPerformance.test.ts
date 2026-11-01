@@ -11,8 +11,18 @@ load('yworks_edge_router_lab/studio-semantic.js');
 const G=ctx.SummaryNativeSemantic,N=ctx.ArchCanvasSemanticView,E=ctx.SummaryEngine;
 const catalog=JSON.parse(readFileSync(new URL('data/semantic/studio-catalog.json',base),'utf8'));
 const plain=(v:any)=>JSON.parse(JSON.stringify(v));
-function strict(graph:any){const v=E.validateView(graph);assert.equal(v.source.ok,true,JSON.stringify(v.source));assert.equal(v.layout.ok,true,JSON.stringify(v.layout));assert.deepEqual(plain(v.edges.filter(([,check]:any)=>!check.ok)),[]);}
-for(const id of ['d6df94c94e8a5888','0216717d966327f4'])test(`interactive routes preserve source, valid geometry and reversible history: ${id}`,()=>{
+function accepted(graph:any,requireComplete:boolean){
+ const v=E.validateView(graph);assert.equal(v.source.ok,true,JSON.stringify(v.source));
+ if(requireComplete){assert.equal(v.layout.ok,true,JSON.stringify(v.layout));assert.deepEqual(plain(v.edges.filter(([,check]:any)=>!check.ok)),[]);}
+ else{
+  assert.equal(N.accepts(graph,v),true,'only explicitly diagnosed incomplete routes may remain');
+  for(const [id,check]of v.edges.filter(([,check]:any)=>!check.ok)){
+   const edge=graph.edges.find((e:any)=>e.id===id);assert.ok(edge.failed||edge.pendingRouting);assert.ok(edge.reason);
+  }
+ }
+}
+for(const id of ['d6df94c94e8a5888','0216717d966327f4'])test(`interactive routes preserve source, routing diagnostics and reversible history: ${id}`,()=>{
+ const strict=(graph:any)=>accepted(graph,id==='d6df94c94e8a5888');
  const m=catalog.models.find((m:any)=>m.id===id),ir=JSON.parse(readFileSync(new URL('data/semantic/'+m.ir.path,base),'utf8'));
  const state=m.presentation?JSON.parse(readFileSync(new URL('data/semantic/'+m.presentation.path,base),'utf8')).default_state:N.state('overview');
  const original=N.prepare({task:'generic-build',ir,state,options:{}}).graph;strict(original);

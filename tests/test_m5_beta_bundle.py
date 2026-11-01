@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import tarfile
 import tempfile
 import unittest
@@ -48,9 +49,30 @@ class M5BetaBundleTests(unittest.TestCase):
         self.assertEqual(manifest["hostE2E"], {"codex": "not-tested", "claude-code": "not-tested", "deepseek-harness": "not-tested"})
         for name in ("src/archcanvas_cli/__main__.py", "studio/dist/index.html", "fixtures/transformer/model.py",
                      "skills/archcanvas/SKILL.md", "schemas/canvas-document.schema.json", "requirements.lock",
-                     "requirements-runtime.lock", "THIRD_PARTY_NOTICES.md"):
+                     "requirements-runtime.lock", "THIRD_PARTY_NOTICES.md", "LICENSE",
+                     "studio/scripts/sync-ui-locales.mjs", "studio/public/preview/ui-en.json"):
             self.assertIn(name, contents)
         self.assertFalse(any(".venv" in name or "__pycache__" in name or "node_modules" in name for name in contents))
+
+    def test_unpacked_source_rebuilds_without_checkout_sources(self):
+        release = self.work / "source-rebuild"
+        verify(self.bundle, release)
+        # Reuse dependencies explicitly; all sources/assets come from the archive.
+        dependencies = ROOT / "studio/node_modules"
+        self.assertTrue(dependencies.is_dir(), "Install locked frontend build dependencies first")
+        link = release / "studio/node_modules"
+        link.symlink_to(dependencies, target_is_directory=True)
+        try:
+            result = subprocess.run(["npm", "run", "build"], cwd=release / "studio",
+                                    capture_output=True, text=True, timeout=120)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertTrue((release / "studio/dist/index.html").is_file())
+            public = release / "studio/public"
+            for source in public.rglob("*"):
+                if source.is_file():
+                    self.assertEqual((release / "studio/dist" / source.relative_to(public)).read_bytes(), source.read_bytes())
+        finally:
+            link.unlink()
 
     def test_independent_extraction_analyzes_three_models_without_execution(self) -> None:
         result = verify(self.bundle, self.work / "independent-release")

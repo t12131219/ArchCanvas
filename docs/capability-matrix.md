@@ -1,5 +1,7 @@
 # 首批真实能力矩阵
 
+当前源码的构建、回归与发行入口见 [development.md](development.md)。下方“当前”均指各段记录的历史构建，不代表最新工作区已通过同一验收；历史工件索引见 [evidence-index.json](evidence-index.json)。
+
 ## 当前状态：受限 memory 连线连续性（2026-10-06）
 
 当前 `index-CU5JhnoS.js` / `index--unhoRTb.css` 的[统一收据](evidence/m4-memory-continuity-current/checks-final-attempt-2/receipt.json)为 Studio **436/436**、fail/skip/cancel0，strict TypeScript/Vite exit0、publication **11/11** skip0；115源码/测试/配置＋3dist＝**118**，另11publication输入。36历史core＋1detail夹具单独冻结，115不是完整传递依赖清单。见[阶段](m4-memory-continuity.md)、[门](evidence/m4-current-gate-audit.json)及[source seal](evidence/m4-memory-continuity-current/implementation-work/source-seal-attempt-2/report.json)。

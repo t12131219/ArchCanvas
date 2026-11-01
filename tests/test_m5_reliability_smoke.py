@@ -67,7 +67,15 @@ class InstalledReliabilityTests(unittest.TestCase):
                 probe.bind(("127.0.0.1", 0))
         except PermissionError:
             self.skipTest("Loopback socket bind unavailable in this sandbox; run on permitted local host.")
-        result = run_reliability(self.skill, self.work / "actual", Path(sys.executable))
+        session_tokens = []
+        original_expect = FailureClient.expect
+        def observe_session(client, path, method, body, status):
+            response = original_expect(client, path, method, body, status)
+            if path == "/api/session":
+                session_tokens.append(response["token"])
+            return response
+        with patch.object(FailureClient, "expect", observe_session):
+            result = run_reliability(self.skill, self.work / "actual", Path(sys.executable))
         self.assertEqual(result["status"], "passed", result.get("error"))
         self.assertEqual([item["check"] for item in result["checks"]], [
             "wrong-port-direction", "shape-conflict-save", "draft-storage-conflict",
@@ -81,8 +89,15 @@ class InstalledReliabilityTests(unittest.TestCase):
         self.assertFalse(result["sourceCommitted"])
         self.assertEqual(result["hostE2E"], "not-tested")
         # Session tokens are never written into diagnostic evidence.
-        receipt = json.loads((self.work / "actual/receipt.json").read_text())
-        self.assertNotIn("token", json.dumps(receipt).lower())
+        # Asset paths can legitimately contain "token" (e.g. Monaco). Check
+        # the two actual credentials, including the retired pre-restart value.
+        self.assertEqual(len(session_tokens), 2)
+        self.assertEqual(len(set(session_tokens)), 2)
+        for evidence in (self.work / "actual").iterdir():
+            if evidence.is_file():
+                content = evidence.read_text()
+                for token in session_tokens:
+                    self.assertNotIn(token, content, f"Session credential leaked into {evidence.name}")
 
 
 if __name__ == "__main__":

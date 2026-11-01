@@ -29,7 +29,7 @@ except ImportError:
 
 
 BUNDLE_MANIFEST = "BUNDLE-MANIFEST.json"
-SOURCE_DIRS = ("src", "studio/dist", "studio/src", "fixtures", "skills", "schemas", "visual-assets",
+SOURCE_DIRS = ("src", "studio/dist", "studio/src", "studio/scripts", "studio/public", "fixtures", "skills", "schemas", "visual-assets",
                "docs/evidence/m5-beta-preflight-mlp-v1", "docs/evidence/m5-beta-preflight-transformer-v1",
                "docs/evidence/m5-beta2-preflight-mlp-v1", "docs/evidence/m5-beta2-preflight-transformer-v1")
 SOURCE_FILES = (
@@ -41,6 +41,7 @@ SOURCE_FILES = (
     "scripts/m5_beta_bundle.py", "scripts/m5_beta_preflight.py", "scripts/export_canvas.mjs",
     "tests/test_m5_beta_release.py", "tests/test_m5_beta_bundle.py", "tests/test_m5_beta_preflight.py",
 )
+CURRENT_BUILD_FILES = ("LICENSE", "docs/evidence-index.json", "scripts/evidence_index.py", ".github/workflows/ci.yml")
 CURRENT_HELPERS = ("scripts/atomic_export.mjs", "scripts/canvas_bridge.mjs",
                    "scripts/validate_tfb_agent_views.py", "scripts/validate_agent_probe_completion.py")
 LIFECYCLE_FILES = (
@@ -52,8 +53,9 @@ LIFECYCLE_FILES = (
 )
 VERSION = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+")
 # The recursive preview carries its source-bound current/historical catalog.
-# Keep both archive limits explicit and bounded while accommodating that data.
-MAX_BYTES = 768 * 1024 * 1024
+# Include public build inputs as well as the prebuilt runtime. Their two
+# inventories are intentional: a clean unpack can build without this checkout.
+MAX_BYTES = 1280 * 1024 * 1024
 MAX_FILES = 20_000
 OPTIONAL_EVIDENCE_FILES = (
     "tests/test_agent_view_completion.py",
@@ -310,7 +312,7 @@ def source_paths(root: Path) -> list[Path]:
                 raise ValueError(f"bundle source symlink forbidden: {path}")
             if path.is_file():
                 paths.add(path)
-    for name in SOURCE_FILES + LIFECYCLE_FILES:
+    for name in SOURCE_FILES + LIFECYCLE_FILES + CURRENT_BUILD_FILES:
         path = root / name
         if not path.is_file() or path.is_symlink():
             raise ValueError(f"required source file missing or symlink: {name}")

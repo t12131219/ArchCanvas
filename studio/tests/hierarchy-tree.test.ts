@@ -11,7 +11,7 @@ import ts from 'typescript';
 import { applyVisualBatch, createDocument } from '../src/core/index.ts';
 import type { Architecture, ArchitectureNode, CanvasDocument } from '../src/core/index.ts';
 
-// Node's strip-types loader cannot read TSX. Compile the actual two component
+// Node's strip-types loader cannot read TSX. Compile the actual component
 // sources, using the already installed React/TypeScript packages, into an
 // ephemeral Studio directory. No browser or replacement React renderer is used.
 const project = fileURLToPath(new URL('../../', import.meta.url));
@@ -22,9 +22,10 @@ function compile(source: string, filename: string) {
   const output = ts.transpileModule(source, { fileName: `${filename}.tsx`, reportDiagnostics: true,
     compilerOptions: { jsx: ts.JsxEmit.ReactJSX, target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } });
   assert.equal(output.diagnostics?.filter(item => item.category === ts.DiagnosticCategory.Error).length ?? 0, 0);
-  writeFileSync(`${temporary}/${filename}.mjs`, output.outputText.replace(/(['\"])\.\/i18n\1/g, `'${pathToFileURL(`${studio}src/i18n.ts`).href}'`).replace(/(['"])\.\/icons(?:\.tsx)?\1/g, "'./icons.mjs'"));
+  writeFileSync(`${temporary}/${filename}.mjs`, output.outputText.replace(/(['\"])\.\/i18n\1/g, `'${pathToFileURL(`${studio}src/i18n.ts`).href}'`).replace(/(['"])\.\/(icons|ModuleSymbol)(?:\.tsx)?\1/g, "'./$2.mjs'"));
 }
 compile(readFileSync(`${studio}src/icons.tsx`, 'utf8'), 'icons');
+compile(readFileSync(`${studio}src/ModuleSymbol.tsx`, 'utf8'), 'ModuleSymbol');
 compile(readFileSync(`${studio}src/HierarchyTree.tsx`, 'utf8'), 'HierarchyTree');
 const previousApp = readFileSync(`${project}docs/evidence/before-hierarchy-optimization/files/studio/src/App.tsx`, 'utf8');
 const previousTree = previousApp.match(/function TreeNode\([\s\S]+$/)?.[0];
@@ -72,7 +73,7 @@ function rows(html: string) {
       const id = attributes.match(/data-tree-node-id="([^"]+)"/)![1];
       const depth = Number(attributes.match(/data-tree-depth="(\d+)"/)![1]);
       const toggle = match[4].match(/<button class="tree-toggle ([^"]*)"([^>]*)>/)!;
-      const label = match[4].match(/<button class="tree-label"><span class="tree-node-dot ([^"]*)"><\/span><span>(.*?)<\/span>(.*?)<\/button>/)!;
+      const label = match[4].match(/<button class="tree-label"><span class="tree-node-dot ([^"]*)"[^>]*><\/span><span>(.*?)<\/span>(.*?)<\/button>/)!;
       return { id, depth, padding: Number(match[3]), selected: attributes.includes('aria-selected="true"'),
         expanded: attributes.match(/aria-expanded="(true|false)"/)?.[1], rowClass: match[2],
         toggleClass: toggle[1], toggleDisabled: toggle[2].includes('disabled=""'),

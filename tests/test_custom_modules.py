@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import unittest
 
+from archcanvas_authoring.source_import import import_editable_source_draft
 from archcanvas_authoring import (DraftError, generate_model, import_source_draft,
                                   preview_custom_module, rebase_source_frontier,
                                   validate_draft)
@@ -278,16 +279,19 @@ process.stdout.write(JSON.stringify({document,scene:buildScene(document)}));"""
         script = """import fs from 'node:fs';
 import {createDocument,buildScene} from './src/core/index.ts';
 const architecture=JSON.parse(fs.readFileSync(0,'utf8'));
-const document=createDocument(architecture);
-document.expandedIds=architecture.nodes.filter(n=>n.children.length).map(n=>n.id);
-process.stdout.write(JSON.stringify({document,scene:buildScene(document)}));"""
+const original=createDocument(architecture);
+const {projectSourceEditing}=await import('./src/sourceEditingProjection.ts');
+const {document,scene}=projectSourceEditing(original);
+process.stdout.write(JSON.stringify({original,originalScene:buildScene(original),document,scene}));"""
         rendered = subprocess.run(["node", "--experimental-strip-types", "--input-type=module", "-e", script],
                                   cwd=ROOT / "studio", input=json.dumps(architecture), text=True, capture_output=True, check=True)
         view = json.loads(rendered.stdout)
-        draft = import_source_draft(view["document"], view["scene"])["draft"]
+        draft = import_editable_source_draft(view["original"], view["originalScene"], view["document"], view["scene"])["draft"]
         definition = preview(source="from torch import nn\nclass Tail(nn.Module):\n def forward(self, x):\n  return x\n", entry="Tail", constructor={})["definition"]
         draft["customModules"] = [definition]
-        draft["nodes"][0]["visual"] = {"width": 340, "height": 280, "fill": "#fff", "stroke": "#123456"}
+        original_bounds = draft["nodes"][0]["presentation"]
+        draft["nodes"][0]["visual"] = {"width": original_bounds["width"] + 10, "height": original_bounds["height"] + 10,
+                                     "fill": "#fff", "stroke": "#123456"}
         output = next(item for item in draft["nodes"] if draft["sourceProvenance"]["nodeRefs"][item["id"]]["kind"] == "Output")
         preceding = next(item for item in draft["edges"] if item["target"]["nodeId"] == output["id"])
         old_source = deepcopy(preceding["source"])
@@ -297,6 +301,12 @@ process.stdout.write(JSON.stringify({document,scene:buildScene(document)}));"""
         rebased = rebase_source_frontier(draft, view["document"], view["scene"])["draft"]
         self.assertEqual(rebased["customModules"], draft["customModules"])
         self.assertEqual(rebased["nodes"][0]["visual"], draft["nodes"][0]["visual"])
+        invalid = deepcopy(draft)
+        invalid["nodes"][0]["visual"].update(width=340, height=280)
+        repaired = rebase_source_frontier(invalid, view["document"], view["scene"])["draft"]
+        self.assertEqual(repaired["nodes"][0]["visual"], {"width": original_bounds["width"], "height": original_bounds["height"],
+                                                        "fill": "#fff", "stroke": "#123456"})
+        self.assertEqual(repaired["customModules"], draft["customModules"])
         generated = generate_model(rebased)
         self.assertIn("custom_tail", generated["nodeBindings"])
         self.assertTrue(any(source["content"].startswith(definition["source"].rstrip()) for source in generated["architecture"]["sources"]))

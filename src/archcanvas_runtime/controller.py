@@ -38,7 +38,9 @@ def normalize_input_spec(value: Any) -> dict[str, Any]:
     if type(seed) is not int or not 0 <= seed < 2**32:
         raise RuntimeProfileError("Seed must be an integer in [0, 2**32).")
     modes = value.get("modes")
-    if not isinstance(modes, list) or not modes or len(set(modes)) != len(modes) or any(mode not in ("eval", "train") for mode in modes):
+    if (not isinstance(modes, list) or not modes
+            or any(type(mode) is not str or mode not in ("eval", "train") for mode in modes)
+            or len(set(modes)) != len(modes)):
         raise RuntimeProfileError("Declare a unique nonempty modes list containing eval and/or train.")
     inputs = {}
     total = 0

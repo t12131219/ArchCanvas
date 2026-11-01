@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "archcanvas-studio"
 version = "0.1.0"
+readme = "README.md"
+license = {file = "LICENSE"}
 description = "Source-grounded model architecture analysis and local visual document service"
 requires-python = ">=3.11"
 dependencies = []

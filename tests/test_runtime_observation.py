@@ -14,7 +14,9 @@ SPEC = {"schemaVersion": 1, "inputs": {"x": {"shape": [2, 3], "dtype": "float32"
 
 class RuntimeProfileValidationTests(unittest.TestCase):
     def test_execution_requires_declared_modes_and_bounded_named_inputs(self):
-        for bad in ({**SPEC, "modes": []}, {**SPEC, "modes": ["train", "train"]}, {**SPEC, "constructor": {"hidden": 3}}, {**SPEC, "inputs": {"x": {"shape": [2000, 2000], "dtype": "float32"}}}):
+        for bad in ({**SPEC, "modes": []}, {**SPEC, "modes": ["train", "train"]},
+                    *({**SPEC, "modes": [mode]} for mode in ([], {}, None, True, 1)),
+                    {**SPEC, "constructor": {"hidden": 3}}, {**SPEC, "inputs": {"x": {"shape": [2000, 2000], "dtype": "float32"}}}):
             with self.subTest(spec=bad), self.assertRaises(RuntimeProfileError):
                 normalize_input_spec(bad)
 

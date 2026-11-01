@@ -67,7 +67,12 @@ class Model(nn.Module):
         open({str(sentinel)!r}, "w").write("forward")
         return self.linear(x)
 '''
-            architecture = analyze_source(source, "Model")
+            with self.assertRaisesRegex(AnalysisError, "safe local forward"):
+                analyze_source(source, "Model")
+            self.assertFalse(sentinel.exists())
+            # An unresolved decorator may replace the class. Inspect the
+            # ordinary class separately without executing any side effects.
+            architecture = analyze_source(source.replace("@danger\n", ""), "Model")
             self.assertFalse(sentinel.exists())
             self.assertIn("Linear", [node["kind"] for node in architecture["nodes"]])
             self.assertTrue(any(node["category"] == "opaque" for node in architecture["nodes"]))
@@ -140,7 +145,7 @@ class Model(nn.Module):
         self.assertEqual(sum(node["kind"] == "Output" for node in architecture["nodes"]), 1)
         self.assertFalse(any(edge["source"]["portId"].endswith(":weights") for edge in architecture["edges"]))
 
-    def test_inherited_forward_is_opaque_but_retains_input(self):
+    def test_safe_local_inherited_forward_retains_input_and_passthrough(self):
         source = '''from torch import nn
 class Base(nn.Module):
     def forward(self, x):
@@ -155,9 +160,14 @@ class Model(nn.Module):
 '''
         architecture = analyze_source(source, "Model")
         child = next(node for node in architecture["nodes"] if node["label"] == "child")
-        self.assertEqual(child["evidence"], "opaque")
+        self.assertEqual((child["kind"], child["evidence"]), ("Module", "source"))
         self.assertTrue(any(port["direction"] == "in" for port in child["ports"]))
         self.assertTrue(any(edge["target"]["nodeId"] == child["id"] for edge in architecture["edges"]))
+        input_node = next(node for node in architecture["nodes"] if node["kind"] == "Input")
+        output = next(node for node in architecture["nodes"] if node["kind"] == "Output")
+        returned = next(edge for edge in architecture["edges"] if edge["target"]["nodeId"] == output["id"])
+        self.assertEqual(returned["source"]["nodeId"], input_node["id"])
+        self.assertEqual(returned["tensorId"], next(edge["tensorId"] for edge in architecture["edges"] if edge["target"]["nodeId"] == child["id"]))
 
     def test_dynamic_control_is_explicit_and_never_merged_as_proven(self):
         source = '''from torch import nn

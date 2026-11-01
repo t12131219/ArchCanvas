@@ -1,6 +1,6 @@
 {
   "schema": "archcanvas-preview-formal-ast-fixture/1",
-  "generatedAt": "2026-10-27T20:04:33.063107+00:00",
+  "generatedAt": "2026-11-01T05:24:01.377037+00:00",
   "inputs": {
     "files": {
       "net/__init__.py": "",
@@ -9,12 +9,12 @@
     },
     "entry": "net.model:Model"
   },
-  "parser": "/home/fzg/PycharmProjects/ArchCanvas/ArchCanvas_Model_Architecture_Studio/src/archcanvas_preview/__init__.py",
+  "parser": "src/archcanvas_preview/__init__.py",
   "implementation": {
     "src/archcanvas_adapters/__init__.py": "68c982322fc63ebf8b9785d7e0935d5760fb0584ed8721c93cfa1416c5207ab7",
-    "src/archcanvas_adapters/registry.py": "eedca3ef0578a4ee3687676c59e8b398f064e255e5ce9378d2a4ce094f388318",
+    "src/archcanvas_adapters/registry.py": "31182f0e4163706fa6ef63c83706c9a760a980c6f700317aed05a23f4e6a340c",
     "src/archcanvas_adapters/source_rules.py": "78828ca1bfa3bd7050aaed145b1c02baa1bdec92d01c89ce9211c0a6753966f9",
-    "src/archcanvas_preview/__init__.py": "bc6e2d7c29349ac108df90544122cb6faa4966292ab08b7f5407582cdb5c579b",
+    "src/archcanvas_preview/__init__.py": "c1b51654c57a8042f577b0a40ff2124b1c6f06439a8ba21e7a7633bbe6060e04",
     "src/archcanvas_preview/analyze.py": "dbe8b886097825d51b3e214d9a5200ba3f007525ae7509b14c2e1f568cb60e08",
     "src/archcanvas_preview/semantic_bridge.py": "c0409972d688bee618ee0f256ca1f769d759b507cdcefbcd8363afc65dad9815",
     "src/archcanvas_python/__init__.py": "125d5112117b4267b6000f4d8c720210ade0d3717ec3cd421cdef36bc99373bd",
@@ -27,7 +27,7 @@
     "src/archcanvas_summary_semantic/contracts.py": "baaccf47fd8cdd68a63600a9c8664680b99b51f07dcb06293838ffd0b1a1d5ba",
     "src/archcanvas_summary_semantic/schema.py": "1d0f661c706b88402279bcfc9ca03fa1577174c49f96cbca3f1b5ff0e606e5b9",
     "src/archcanvas_summary_semantic/sources.py": "5b7280a0b65553ffc85baded577aa43524c7e7d639caf568000817c15645d568",
-    "studio/scripts/generate-preview-ast-fixture.py": "ba6387d9c014575ea4adb173b563f7a7ac6ab15046e67344d368e4d71c3a7cc3"
+    "studio/scripts/generate-preview-ast-fixture.py": "2931856ebee519b416d52a030acf8d212cd671e55a942501e8f4bb17b2063557"
   },
   "modelExecuted": false,
   "torchLoaded": false,

@@ -187,7 +187,7 @@ test('actual formal AST parsers preserve multifile shared calls and keep ambiguo
   for (const [path, digest] of Object.entries(parsed.implementation)) {
     assert.equal(createHash('sha256').update(readFileSync(new URL('../../' + path, import.meta.url))).digest('hex'), digest, `Stale formal AST fixture; rerun generate-preview-ast-fixture.py: ${path}`);
   }
-  assert.ok(parsed.parser.startsWith(src + '/archcanvas_preview/'));
+  assert.equal(parsed.parser, 'src/archcanvas_preview/__init__.py');
   assert.equal(parsed.modelExecuted, false); assert.equal(parsed.torchLoaded, false);
   assert.equal(parsed.bundle.ir.modelExecuted, false);
   assert.deepEqual(parsed.bundle.diagnostics, []);

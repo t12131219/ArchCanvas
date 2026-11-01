@@ -179,15 +179,31 @@ def main(request):
                     hooks.clear()
                     run_branches = list(branch_events)
                     def output_digest(value):
+                        def context_contract(context):
+                            if context is None or type(context) in (int, float, bool, str):
+                                return {'scalar_type': type(context).__name__, 'value': context}
+                            if type(context) in (list, tuple):
+                                return {'type': type(context).__name__, 'items': [context_contract(v) for v in context]}
+                            if isinstance(context, type):
+                                return {'class': [context.__module__, context.__qualname__],
+                                        'fields': list(getattr(context, '_fields', ())) }
+                            raise ValueError('output tree context unsupported for replay verification: ' + type(context).__name__)
+
+                        def tree_contract(spec):
+                            return {'type': None if spec.type is None else [spec.type.__module__, spec.type.__qualname__],
+                                    'context': context_contract(spec.context),
+                                    'children': [tree_contract(child) for child in spec.children_specs]}
+
+                        leaves, structure = tree_flatten(value)
                         result = []
-                        for item in tree_flatten(value)[0]:
+                        for item in leaves:
                             if isinstance(item, torch.Tensor):
                                 tensor = item.detach().cpu().contiguous().clone()
                                 result.append({'tensor': metadata(tensor), 'value_digest': hashlib.sha256(bytes(tensor.untyped_storage())).hexdigest()})
                             elif type(item) in (int, float, bool, str, type(None)):
-                                result.append({'scalar': item})
+                                result.append({'scalar_type': type(item).__name__, 'scalar': item})
                             else: raise ValueError('output type unsupported for replay verification: ' + type(item).__name__)
-                        return hashlib.sha256(json.dumps(result, sort_keys=True, allow_nan=False).encode()).hexdigest()
+                        return hashlib.sha256(json.dumps({'tree': tree_contract(structure), 'leaves': result}, sort_keys=True, allow_nan=False).encode()).hexdigest()
                     first_digest = output_digest(output)
                     torch.manual_seed(seed)
                     replay_model = model_class(**request.get('constructor', {})).cpu()
@@ -206,7 +222,7 @@ def main(request):
                         except Exception as exc: capture = {'status': 'unsupported', 'reason': f'{type(exc).__name__}: {exc}'[:1500]}
                 runs.append({'case': case['id'], 'mode': mode, 'seed': seed, 'status': status, 'events': events,
                              'module_events': module_events, 'parameters': parameters, 'buffers': buffers,
-                             'outputs': outputs, 'replay': {'matched': True, 'output_digest': first_digest}, 'branches': run_branches, 'capture': capture, 'truncated': truncated[0]})
+                             'outputs': outputs, 'replay': {'matched': True, 'output_digest': first_digest, 'digest_schema': 'typed-pytree/1'}, 'branches': run_branches, 'capture': capture, 'truncated': truncated[0]})
             except Exception as exc:
                 runs.append({'case': case['id'], 'mode': mode, 'status': 'failed', 'reason': f'{type(exc).__name__}: {exc}',
                              'events': events, 'module_events': module_events, 'branches': list(branch_events), 'truncated': truncated[0]})

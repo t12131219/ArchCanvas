@@ -36,7 +36,7 @@ report = {
     "schema": "archcanvas-preview-formal-ast-fixture/1",
     "generatedAt": datetime.now(timezone.utc).isoformat(),
     "inputs": {"files": FILES, "entry": ENTRY},
-    "parser": str(parser), "implementation": dict(sorted(modules.items())),
+    "parser": parser.relative_to(PROJECT).as_posix(), "implementation": dict(sorted(modules.items())),
     "modelExecuted": False, "torchLoaded": False,
     "bundle": bundle, "architecture": architecture,
 }

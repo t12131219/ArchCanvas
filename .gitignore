@@ -9,3 +9,7 @@ dist/
 build/
 .archcanvas/
 *.tsbuildinfo
+# Keep historical tracked snapshots; prevent new recursive evidence copies.
+docs/evidence/**/docs/evidence/
+studio/.*-regression-*/
+studio/.*-independent-*/

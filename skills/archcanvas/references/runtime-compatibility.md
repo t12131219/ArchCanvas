@@ -2,7 +2,7 @@
 
 A Skill description does not install a runtime. Identify this copy with its launcher and `doctor --summary`; use its actual version, asset hashes and module counts. Frozen Beta.2 is a historical 17/3 distribution. Current development capabilities are not its release certification. Human/publication/performance gates and actual three-host client E2E remain open.
 
-`doctor --summary` performs the same complete integrity checks and returns the actual version, runtime root, catalog counts, asset count and inventory digest, omitting thousands of per-file asset entries. Use full `doctor` only when the inventory itself is needed. Never paste the complete installation manifest or asset inventory into model context just to identify a runtime.
+`doctor --summary` performs the same exact frozen-file inventory checks as full doctor (identity, paths, sizes, digests and absence of extra files) and returns the actual version, runtime root, catalog counts, asset count and inventory digest, omitting thousands of per-file asset entries. Use full `doctor` only when the inventory itself is needed. Never paste the complete installation manifest or asset inventory into model context just to identify a runtime.
 
 ## Resolve a formal runtime
 
@@ -55,7 +55,16 @@ The failed prototype may be inspected read-only to identify pitfalls or a narrow
 
 ## New authored model drafts
 
-For a request to build a model from zero, the current formal Studio has a separate authored-draft workspace and the actual runtime’s catalog and transparent starting graphs. Check `modelAuthoring` and the actual `/api/authoring/catalog`; create and save a draft rather than inserting fabricated source-bound nodes into a CanvasDocument. Generation statically validates declared tensors, exact operation/port bindings and generated source facts; it never executes the model. Opening “编辑当前模型” imports a source-derived draft that retains the current frontier’s layout, style, hierarchy, selection and camera, and source-frontier rebase refuses changed source or IR digests. Open the generated source as a new managed project only after showing the concrete source. This is distinct from structural writeback into an existing imported model, which retains its reviewed transaction requirements.
+The native Summary and formal Python authoring workspaces have separate contracts:
+
+| User goal | Studio entry | Result |
+|---|---|---|
+| Edit the current native graph | “编辑 → 打开构件编辑…”（旧名“编辑当前模型”） | Summary editing copy with its native assembly/layout history; no implied Python generation |
+| Start a native composition | “新建空白模型” | New Summary AuthoringModel |
+| Edit a source-derived Python draft | “编辑 → 正式源码工作副本” | Formal source-bound draft; supported generation creates a new managed source copy |
+| Build a typed Python model from zero | “新建正式源码模型” | Formal authored draft using the live `/api/authoring/catalog` |
+
+For the formal Python paths, check `modelAuthoring`, create and save a draft, and inspect validation/generation support. Generation statically checks declared tensors, exact operation/port bindings and generated source facts; it never executes the model. A source-derived draft retains supported presentation state, and source-frontier rebase refuses changed source or IR digests. Show the concrete generated source before opening its new managed project. Reviewed in-place source transactions remain a separate workflow. Menu availability and capabilities must be checked on the actual installed release.
 
 The development library exposes transparent starting graphs, including MLP, CNN, residual, convolutional, attention, recurrent, embedding, decoder, U-Net and projection variants. Click or drag one from the left library, then edit its ordinary modules, parameters and tensor connections. These are transparent draft graphs built from registered atomic kinds, not opaque whole-network promises or executed models. A new harness must still establish that its actual Studio provides this UI; representative AI trials do not certify human usability or publication quality. The older three-graph statement above remains historical evidence only.
 

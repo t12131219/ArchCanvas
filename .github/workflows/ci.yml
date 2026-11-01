@@ -1,0 +1,56 @@
+name: Regression checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+      - name: Prepare project interpreter
+        run: python -m venv .venv
+      - name: Install locked frontend dependencies
+        run: npm ci
+        working-directory: studio
+      - name: Build and audit current frontend
+        run: |
+          npm run build
+          npm run audit:preview
+        working-directory: studio
+      - name: Full frontend regression
+        run: npm test
+        working-directory: studio
+      - name: Static and real HTTP regression
+        env:
+          PYTHONPATH: src:tests
+        run: >-
+          .venv/bin/python -m unittest -v
+          test_doctor_summary
+          test_runtime_analysis
+          test_runtime_observation.RuntimeProfileValidationTests
+          test_authoring test_custom_modules test_source_preservation
+          test_source_rule_registry_atomic test_config_activation_http
+          test_readiness_fixes test_summary_authoring_http
+          test_summary_runtime_http test_preview_bundle_budgets
+      - name: Archive inventory
+        run: .venv/bin/python scripts/evidence_index.py --output "$RUNNER_TEMP/evidence-index.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-index
+          path: ${{ runner.temp }}/evidence-index.json

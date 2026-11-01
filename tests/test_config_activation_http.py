@@ -99,6 +99,18 @@ class ConfigActivationHTTPTests(unittest.TestCase):
         self.assertEqual(self.source.read_bytes(), SOURCE.encode())
         self.assertEqual(committed["committedArchitecture"]["edges"], self.architecture["edges"])
 
+    def test_nested_modes_return_400_without_starting_a_job_and_service_recovers(self):
+        for modes in ([[]], [{}], [None], [True], [1]):
+            with self.subTest(modes=modes):
+                spec = {**SPEC, "modes": modes}
+                status, error = self.request(self.route("activation-jobs"), "POST",
+                    {**self.common("ReLU"), "activation": "GELU", "inputSpec": spec})
+                self.assertEqual(status, 400, error)
+                self.assertIn("modes", error["error"])
+                self.assertEqual(self.server.runtime_jobs, {})
+                self.assertEqual(self.path.read_bytes(), SOURCE.encode())
+        self.assertEqual(self.request("/api/session")[0], 200)
+
     def test_configuration_rejects_stale_base_and_caller_filesystem_environment(self):
         valid = {**self.common("Dropout"), "parameter": "p", "value": 0.3}
         for key, value in (("root", str(self.original)), ("runtimeConfig", {})):
